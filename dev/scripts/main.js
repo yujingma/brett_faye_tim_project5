@@ -13,9 +13,9 @@ app.callTeleport = () => {
 app.callDarkSky = (latitude, longitude) => {
 	var keyDarkSky = 'ecb6e7f16bb182021ecf519d1099721a';
 	var weather = $.ajax({
-		url: `https://api.darksky.net/forecast/${keyDarkSky}/${latitude},${longitude}`,
+		url: `https://api.darksky.net/forecast/${keyDarkSky}/${latitude},${longitude}?units=ca`,
 		method: 'GET',
-		dataType: 'jsonp',
+		dataType: 'jsonp'
 	}).then((res) => {
 		console.log(res);
 	});
@@ -40,6 +40,11 @@ app.callEdamam = () => {
 	});
 }
 
+// Yummly variables
+app.idYummly = '95ec33fc';
+app.keyYummly = '2410ab65b1957770177d384fa57c6070';
+app.urlYummly = 'http://api.yummly.com/v1/api/recipes';
+
 // ajax call to Yummly
 app.callYummly = () => {
 	var idYummly = '95ec33fc';
@@ -52,7 +57,8 @@ app.callYummly = () => {
 		data: {
 			q: 'soup',
 			_app_id: idYummly,
-			_app_key: keyYummly
+			_app_key: keyYummly,
+			allowedAllergy: ['dairy']
 		}
 	}).then((res) => {
 		console.log(res);
