@@ -55,11 +55,12 @@ app.callYummly = () => {
 		dataType : 'jsonp',
 		method: 'GET',
 		data: {
-			// q: 'dessert',
+			q: 'bbq',
 			_app_id: idYummly,
 			_app_key: keyYummly,
-			allowedCourse: "course^course-Cocktails",
-			allowedAllergy: "401^Sulfite-Free"
+			excludedCourse: "course^course-Cocktails"
+			// allowedCourse: "course^course-Cocktails",
+			// allowedAllergy: "401^Sulfite-Free"
 			// allowedAllergy: "394^Peanut-Free", "395^Tree Nut-Free", "393^Gluten-Free", "398^Seafood-Free", "396^Dairy-Free", "397^Egg-Free", "400^Soy-Free", "399^Sesame-Free", "401^Sulfite-Free"
 			// allowedDiet: "386^Vegan", "387^Lacto-ovo vegetarian", "403^Paleo"
 		}
