@@ -63,7 +63,7 @@ app.callYummly = () => {
 		dataType : 'jsonp',
 		method: 'GET',
 		data: {
-			q: 'dessert',
+			q: ['sour','pie'],
 			_app_id: idYummly,
 			_app_key: keyYummly,
 			allowedCourse: "course^course-Cocktails",
