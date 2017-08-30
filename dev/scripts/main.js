@@ -55,10 +55,10 @@ app.callYummly = () => {
 		dataType : 'json',
 		method: 'GET',
 		data: {
-			q: 'soup',
+			q: 'rain',
 			_app_id: idYummly,
 			_app_key: keyYummly,
-			allowedAllergy: ['dairy']
+			// allowedAllergy: ['dairy']
 		}
 	}).then((res) => {
 		console.log(res);
