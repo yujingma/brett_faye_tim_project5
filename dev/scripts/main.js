@@ -12,30 +12,40 @@ app.callEdamam = () => {
 		url: `${app.urlEdamam}?q=${app.queryEdamam}&app_id=${app.idEdamam}&app_key=${app.keyEdamam}&health=vegetarian`,
 		method: 'GET'
 	}).then((res) => {
-		// console.log(res)
+		console.log(res)
 	});
 }
 
-// Yummly variables
-app.idYummly = '86703d55';
-app.keyYummly = '643f0b6adeda2bf621d4915673aece42';
-app.urlYummly = 'http://api.yummly.com/v1';
-app.queryYummly = 'soup';
+var yummlyApp = {};
+yummlyApp.yumUrl = 'http://api.yummly.com/v1';
+yummlyApp.yumKey = '2410ab65b1957770177d384fa57c6070';
+yummlyApp.yumId = '95ec33fc';
 
-// ajax call to Yummly
-app.callYummly = () => {
-	$.ajax({
-		url: `${app.urlYummly}?q=${app.queryYummly}&app_id=${app.idYummly}&app_key=${app.keyYummly}`,
-		method: 'GET'
-	}).then((res) => {
-		console.log(res)
-	});
+
+
+yummlyApp.getData = function(){
+	// make an ajax request
+	var receipe = $.ajax({
+	      url : `http://api.yummly.com/v1/api/recipes`,
+	      dataType : 'json',
+	      method: 'GET',
+	      data: {
+	      	  q: 'onion soup',
+	          _app_id: yummlyApp.yumId,
+	          _app_key: yummlyApp.yumKey
+	      }
+
+		}).then(function(res) {
+			console.log(res);
+		})
 }
 
 // initialize code
 app.init = () => {
 	app.callEdamam();
+	yummlyApp.getData();
 };
 
 // document ready
 $(app.init);
+
