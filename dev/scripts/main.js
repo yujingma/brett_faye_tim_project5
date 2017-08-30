@@ -13,9 +13,9 @@ app.callTeleport = () => {
 app.callDarkSky = (latitude, longitude) => {
 	var keyDarkSky = 'ecb6e7f16bb182021ecf519d1099721a';
 	var weather = $.ajax({
-		url: `https://api.darksky.net/forecast/${keyDarkSky}/${latitude},${longitude}`,
+		url: `https://api.darksky.net/forecast/${keyDarkSky}/${latitude},${longitude}?units=ca`,
 		method: 'GET',
-		dataType: 'jsonp',
+		dataType: 'jsonp'
 	}).then((res) => {
 		console.log(res);
 	});
@@ -39,6 +39,11 @@ app.callDarkSky = (latitude, longitude) => {
 // 		console.log(res)
 // 	});
 // }
+
+// Yummly variables
+app.idYummly = '95ec33fc';
+app.keyYummly = '2410ab65b1957770177d384fa57c6070';
+app.urlYummly = 'http://api.yummly.com/v1/api/recipes';
 
 // ajax call to Yummly
 app.callYummly = () => {
