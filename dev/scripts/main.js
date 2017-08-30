@@ -51,7 +51,8 @@ app.callEdamam = () => {
 		data: {
 			q: 'soup',
 			app_id: app.idEdamam,
-			app_key: app.keyEdamam
+			app_key: app.keyEdamam,
+			health: ['gluten-free']
 		}
 	}).then((res) => {
 		console.log(res)
@@ -62,6 +63,7 @@ app.callEdamam = () => {
 app.idYummly = '95ec33fc';
 app.keyYummly = '2410ab65b1957770177d384fa57c6070';
 app.urlYummly = 'http://api.yummly.com/v1/api/recipes';
+// app.urlExclude = 'http://api.yummly.com/v1/api/metadata/ingredient';
 
 // ajax call to Yummly
 app.callYummly = () => {
@@ -72,11 +74,12 @@ app.callYummly = () => {
 		data: {
 			q: 'soup',
 			_app_id: app.idYummly,
-			_app_key: app.keyYummly
+			_app_key: app.keyYummly,
+			excludedIngredient: ['Onion']
 		}
 	}).then((res) => {
 		console.log(res);
-	})
+	})	
 }
 
 // initialize code
@@ -88,4 +91,4 @@ app.init = () => {
 // document ready
 $(app.init);
 
->>>>>>> 71b1fb3960ef35f9b3eb6ddbb462faacff87ce2e
+
