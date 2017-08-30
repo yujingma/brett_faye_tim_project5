@@ -6,15 +6,37 @@
 	<link rel="stylesheet" href="dev/plugins/teleport/teleport-autocomplete.css">
 </head>
 <body>
-	<h1>Feels Like Soup</h1>
-	<h2>Definitely yes</h2>
-	<p>This app is going be great!</p>
-
-	<input type="text" class="cityInput" autocomplete="on">
-	<div class="tp-autocomplete"><input type="text" class="my-input tp-ac__input" placeholder="Pick your city" autocomplete="off" data-com.agilebits.onepassword.user-edited="yes"><ul class="tp-ac__list"></ul></div>
-	
-	<script src="dev/plugins/teleport/teleport-autocomplete.js"></script>
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-	<script src="dev/scripts/main.js"></script>
+	<header>
+		<div class="title">
+			<img src="" alt="logo image">
+			<h1>feels like soup</h1>
+		</div>
+		<div class="description">
+			<h2>This app gives you the best suggestion of recipe based on the weather of your city, please type your location and we will give you the nearest awesome food.</h2>
+		</div>
+	</header>
+	<main>
+		<div class="userInfo">
+			<div class="tp-autocomplete"><input type="text" class="my-input tp-ac__input" placeholder="Pick your city" autocomplete="off" data-com.agilebits.onepassword.user-edited="yes"><ul class="tp-ac__list"></ul></div>
+			<div class="foodRestricts"></div>
+			<input type="submit" value="submit">
+		</div>
+		<div class="result">
+			<button>save the result</button>
+		</div>
+		<div class="receipe"></div>
+	</main>
+	<footer>
+		<div class="upperFooter">
+			<img src="" alt="logo image">
+			<h3>feels like soup</h3>
+		</div>
+		<div class="lowerFooter">
+			<p>Created by Brett,Faye,Tim in 2017. Powered by DarkSky API, Yummly API and Teleport public APIs</p>
+		</div>
+	</footer>
+<script src="dev/plugins/teleport/teleport-autocomplete.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="dev/scripts/main.js"></script>
 </body>
 </html>
