@@ -49,9 +49,10 @@ app.callEdamam = () => {
 		dataType: 'json',
 		method: 'GET',
 		data: {
-			q: 'soup',
 			app_id: app.idEdamam,
-			app_key: app.keyEdamam
+			app_key: app.keyEdamam,
+			health: ['sugar-conscious'],
+			q: 'cookies'
 		}
 	}).then((res) => {
 		console.log(res)
@@ -62,6 +63,13 @@ app.callEdamam = () => {
 app.idYummly = '95ec33fc';
 app.keyYummly = '2410ab65b1957770177d384fa57c6070';
 app.urlYummly = 'http://api.yummly.com/v1/api/recipes';
+// app.urlYummly = 'http://api.yummly.com/v1/api/metadata/ingredient';
+
+// http://api.yummly.com/v1/api/recipes?_app_id=YOUR_ID&_app_key=YOUR_APP_KEY&q=onion+soup
+// &excludedIngredient[]=onion%20soup%20mix&excludedIngredient[]=gruy
+
+// http://api.yummly.com/v1/api/metadata/ingredient?_app_id=YOUR_ID&_app_key=YOUR_APP_KEY
+// http://api.yummly.com/v1/api/metadata/ingredient?_app_id=YOUR_ID&_app_key=YOUR_APP_KEY
 
 // ajax call to Yummly
 app.callYummly = () => {
@@ -70,9 +78,11 @@ app.callYummly = () => {
 		dataType : 'json',
 		method: 'GET',
 		data: {
-			q: 'soup',
+			q: 'Thai',
 			_app_id: app.idYummly,
-			_app_key: app.keyYummly
+			_app_key: app.keyYummly,
+			excludedIngredient: 'peanuts',
+			// allowedAllergy: ['Wheat']
 		}
 	}).then((res) => {
 		console.log(res);
@@ -88,4 +98,3 @@ app.init = () => {
 // document ready
 $(app.init);
 
->>>>>>> 71b1fb3960ef35f9b3eb6ddbb462faacff87ce2e
