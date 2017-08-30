@@ -1,3 +1,40 @@
+
+//Teleport Autocomplete
+$(function(){
+
+getCity = function(){
+	TeleportAutocomplete.init('.my-input').on('change', function(cityData){
+		var latitude = cityData.latitude;
+		var longitude = cityData.longitude;
+		console.log(`The cities latitude is ${latitude} and it's longitude is ${longitude}`);
+		getWeather(latitude, longitude);
+	});
+}
+
+getCity();
+
+//Dark Sky API Call
+
+getWeather = function(latitude, longitude) {
+var key = 'ecb6e7f16bb182021ecf519d1099721a';
+	$.ajax({
+	url: `https://api.darksky.net/forecast/${key}/${latitude},${longitude}`,
+	method: 'GET',
+	dataType: 'jsonp',
+	data: {
+		format: 'jsonp'
+	}
+}).then(function(res) {
+  console.log(res);
+});
+
+
+};
+
+});
+
+
+
 const app = {};
 
 // Edamam variables
@@ -51,3 +88,4 @@ app.init = () => {
 // document ready
 $(app.init);
 
+>>>>>>> 71b1fb3960ef35f9b3eb6ddbb462faacff87ce2e

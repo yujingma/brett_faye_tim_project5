@@ -3,10 +3,10 @@
 <head>
 	<meta charset="UTF-8">
 	<title>brett_faye_tim_project5</title>
+	<link rel="stylesheet" href="dev/plugins/teleport/teleport-autocomplete.css">
 </head>
 <body>
 	<header>
-		<div class='movieGenres'></div>
 		<div class="title">
 			<img src="" alt="logo image">
 			<h1>feels like soup</h1>
@@ -17,7 +17,7 @@
 	</header>
 	<main>
 		<div class="userInfo">
-			<input type="text" value="your location goes here">
+			<div class="tp-autocomplete"><input type="text" class="my-input tp-ac__input" placeholder="Pick your city" autocomplete="off" data-com.agilebits.onepassword.user-edited="yes"><ul class="tp-ac__list"></ul></div>
 			<div class="foodRestricts"></div>
 			<input type="submit" value="submit">
 		</div>
@@ -35,7 +35,8 @@
 			<p>Created by Brett,Faye,Tim in 2017. Powered by DarkSky API, Yummly API and Teleport public APIs</p>
 		</div>
 	</footer>
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-	<script src="dev/scripts/main.js"></script>
+<script src="dev/plugins/teleport/teleport-autocomplete.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="dev/scripts/main.js"></script>
 </body>
 </html>
