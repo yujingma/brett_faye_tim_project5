@@ -9,8 +9,8 @@ app.urlEdamam = 'https://api.edamam.com/search';
 app.callEdamam = () => {
 	var recipeEdamam = $.ajax({
 		url: app.urlEdamam,
-		dataType: 'json'
-		method: 'GET'
+		dataType: 'json',
+		method: 'GET',
 		data: {
 			q: 'soup',
 			app_id: app.idEdamam,
@@ -24,7 +24,7 @@ app.callEdamam = () => {
 // Yummly variables
 app.idYummly = '95ec33fc';
 app.keyYummly = '2410ab65b1957770177d384fa57c6070';
-app.urlYummly = 'http://api.yummly.com/v1';
+app.urlYummly = 'http://api.yummly.com/v1/api/recipes';
 
 // ajax call to Yummly
 app.callYummly = () => {
@@ -45,7 +45,7 @@ app.callYummly = () => {
 // initialize code
 app.init = () => {
 	app.callEdamam();
-	app.getData();
+	app.callYummly();
 };
 
 // document ready
