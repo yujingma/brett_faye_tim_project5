@@ -16,8 +16,7 @@ app.callDarkSky = (latitude, longitude) => {
 		method: 'GET',
 		dataType: 'jsonp'
 	}).then((res) => {
-		console.log(res);
-		app.currentTemp = $('<h2>').text(Math.round(res.currently.apparentTemperature));
+		app.currentTemp = Math.round(res.currently.apparentTemperature);
 		app.currentIcon = res.currently.icon;
 		app.currentWeather = $('<h4>').text(res.currently.summary);
 		app.weatherFilter();
@@ -79,7 +78,6 @@ app.callYummly = (foodChoice, allergyRestrict, dietRestrict) => {
 			excludedCourse: ["course^course-Cocktails", "course^course-Condiments and Sauces", "course^course-Beverages"],
 		}
 	}).then((res) => {
-		console.log(res);
 		var recipeMatches = res.matches;
 		var recipeChoice = recipeMatches[Math.floor(Math.random()*recipeMatches.length)];
 		var recipeId = recipeChoice.id;
@@ -133,8 +131,7 @@ app.callRecipeInfo = (recipeId) => {
 			else{
 				weatherIcon = $('<img>').attr('src', 'dev/assets/partly-cloudy-night.svg');
 			}
-		// }
-		$('#weatherContainer').append(app.currentTemp, weatherIcon, app.currentWeather);
+		$('#weatherContainer').append(`<h2>${app.currentTemp}</h2>`, weatherIcon, app.currentWeather);
 		$('#recipeContainer').empty();
 		let selectedImage = $('<img>').attr('src', res.images[0].hostedLargeUrl);
 		let selectedName = $('<h2>').text(res.name);
