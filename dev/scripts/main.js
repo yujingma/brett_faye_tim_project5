@@ -25,6 +25,7 @@ app.callDarkSky = (latitude, longitude) => {
 	}).then((res) => {
 		var currentTemp = res.currently.apparentTemperature;
 		app.weatherFilter(currentTemp);
+		console.log(currentTemp);
 	});
 }
 
@@ -46,30 +47,30 @@ app.weatherFilter = (currentTemp) => {
 	else{
 		var selectedFoods = ['salad', 'ice cream', 'cool', 'cucumber', 'summer', 'watermelon'];
 	}
-	var foodChoice = selectedFoods[Math.floor(Math.random()*selectedFoods.length)];
-	app.callYummly(foodChoice);
+	app.foodChoice = selectedFoods[Math.floor(Math.random()*selectedFoods.length)];
 }
 
 // a function that gathers dietary restrictions and passes them into an array
 app.events = () => {
-	var dietRestrict = [];
-	$('.my-input').on('change', () => {
-		app.callDarkSky();
-	});
+	let allergyRestrict = [];
+	let dietRestrict = [];
 	$('.userInfo').on('submit', function(e) {
 		e.preventDefault();
-		var dietRestrict = $(".check:checked").map(function(){
-		      return $(this).val();
-		    }).get(); 
-		    console.log(dietRestrict);
+		allergyRestrict = $(".allergy:checked").map(function(){
+			return $(this).val();
+			}).get();
+			console.log(allergyRestrict);
+		dietRestrict = $(".diet:checked").map(function(){
+			return $(this).val();
+			}).get();
+			console.log(dietRestrict);
+			console.log(app.foodChoice);
+			app.callYummly(app.foodChoice, allergyRestrict, dietRestrict);
 	});
-
-	console.log(dietRestrict);
 }
 
-
 // ajax call to Yummly
-app.callYummly = (foodChoice) => {
+app.callYummly = (foodChoice, allergyRestrict, dietRestrict) => {
 	var idYummly = '95ec33fc';
 	var keyYummly = '2410ab65b1957770177d384fa57c6070';
 	var urlYummly = 'http://api.yummly.com/v1/api/recipes';
@@ -81,9 +82,9 @@ app.callYummly = (foodChoice) => {
 			q: foodChoice,
 			_app_id: idYummly,
 			_app_key: keyYummly,
+			allowedAllergy: allergyRestrict,
+			allowedDiet: dietRestrict,
 			excludedCourse: ["course^course-Cocktails", "course^course-Condiments and Sauces"],
-			// allowedAllergy: "394^Peanut-Free", "395^Tree Nut-Free", "393^Gluten-Free", "398^Seafood-Free", "396^Dairy-Free", "397^Egg-Free", "400^Soy-Free", "399^Sesame-Free", "401^Sulfite-Free"
-			// allowedDiet: "386^Vegan", "387^Lacto-ovo vegetarian", "403^Paleo"
 		}
 	}).then((res) => {
 		var recipeMatches = res.matches;
@@ -96,7 +97,6 @@ app.callYummly = (foodChoice) => {
 // initialize code
 app.init = () => {
 	app.callTeleport();
-	app.callYummly();
 	app.events();
 };
 
