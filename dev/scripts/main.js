@@ -83,7 +83,6 @@ app.callYummly = (foodChoice, allergyRestrict, dietRestrict) => {
 		var recipeChoice = recipeMatches[Math.floor(Math.random()*recipeMatches.length)];
 		console.log(recipeChoice);
 	})
-
 }
 
 // initialize code
