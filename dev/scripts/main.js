@@ -16,25 +16,27 @@ app.callDarkSky = (latitude, longitude) => {
 		method: 'GET',
 		dataType: 'jsonp'
 	}).then((res) => {
-		var currentTemp = res.currently.apparentTemperature;
-		app.weatherFilter(currentTemp);
 		console.log(res);
+		app.currentTemp = res.currently.apparentTemperature;
+		app.currentIcon = res.currently.icon;
+		app.currentWeather = res.currently.summary;
+		app.weatherFilter();
 	});
 }
 
 // a function that filters search results based on currentTemp
-app.weatherFilter = (currentTemp) => {
+app.weatherFilter = () => {
 	var foodPicks = [];
-	if(currentTemp <= 0){
+	if(app.currentTemp <= 0){
 		var selectedFoods = ['roast', 'pasta', 'chili', 'pot pie', 'stew', 'winter'];
 	}
-	else if(currentTemp > 0 && currentTemp <= 10){
+	else if(app.currentTemp > 0 && app.currentTemp <= 10){
 		var selectedFoods = ['soup', 'pizza', 'pumpkin', 'apple', 'slow cooker', 'dumpling', 'spicy', 'autumn'];
 	}
-	else if(currentTemp > 10 && currentTemp <= 20){
+	else if(app.currentTemp > 10 && app.currentTemp <= 20){
 		var selectedFoods = ['sushi', 'sandwich', 'breakfast', 'brunch', 'fried', 'spring'];
 	}
-	else if(currentTemp > 20 && currentTemp <= 25){
+	else if(app.currentTemp > 20 && app.currentTemp <= 25){
 		var selectedFoods = ['bbq', 'mexican', 'indian', 'greens', 'curry', 'berries'];
 	}
 	else{
@@ -84,7 +86,7 @@ app.callYummly = (foodChoice, allergyRestrict, dietRestrict) => {
 	})
 }
 
-// a function to call recipe info for selected item
+// a function to call and display recipe info for selected item
 app.callRecipeInfo = (recipeId) => {
 	let idYummly = '95ec33fc';
 	let keyYummly = '2410ab65b1957770177d384fa57c6070';
@@ -98,7 +100,8 @@ app.callRecipeInfo = (recipeId) => {
 			_app_key: keyYummly
 		}
 	}).then((res) => {
-		console.log(res);
+		$('#weatherContainer').empty();
+		$('#weatherContainer').append(app.currentTemp, app.currentIcon, app.currentWeather);
 		$('#recipeContainer').empty();
 		let selectedImage = $('<img>').attr('src', res.images[0].hostedLargeUrl);
 		let selectedName = $('<h2>').text(res.name);
