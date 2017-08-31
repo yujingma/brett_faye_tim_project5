@@ -76,16 +76,15 @@ app.events = () => {
 	$('.my-input').on('change', () => {
 		app.callDarkSky();
 	});
-	$('form').on('submit', (e) => {
+	$('.userInfo').on('submit', function(e) {
 		e.preventDefault();
-		$('#receipeContainer').append('<h3>Here is your recipe!</h3>');
-		$('#receipeContainer').append('recipeChoice');
 		// why they don't work???????
-		if($('.check').is(':checked') == true){
-			$(this).val().push(dietRestrict);
-			// why we have to push here????
-		}
+		var dietRestrict = $(".check:checked").map(function(){
+		      return $(this).val();
+		    }).get(); 
+		    console.log(dietRestrict);
 	});
+
 	console.log(dietRestrict);
 }
 
@@ -119,6 +118,7 @@ app.callYummly = (foodChoice) => {
 app.init = () => {
 	app.callTeleport();
 	app.callYummly();
+	app.events();
 };
 
 $(app.init);
