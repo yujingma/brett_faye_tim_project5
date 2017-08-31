@@ -14,15 +14,7 @@ app.callDarkSky = (latitude, longitude) => {
 	var weather = $.ajax({
 		url: `https://api.darksky.net/forecast/${keyDarkSky}/${latitude},${longitude}?units=ca`,
 		method: 'GET',
-		dataType: 'jsonp',
-		data: {
-			// is that mistook Edamam's data??????
-			q: 'soup',
-			app_id: app.idEdamam, 
-			app_key: app.keyEdamam,
-			health: ['gluten-free']
-		}
-
+		dataType: 'jsonp'
 	}).then((res) => {
 		var currentTemp = res.currently.apparentTemperature;
 		app.weatherFilter(currentTemp);
