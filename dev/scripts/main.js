@@ -104,7 +104,7 @@ app.callYummly = (foodChoice) => {
 // initialize code
 app.init = () => {
 	app.callTeleport();
-	app.callYummly();
+	// app.callYummly();
 };
 
 // document ready
