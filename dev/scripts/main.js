@@ -1,5 +1,4 @@
 const app = {};
-
 // call to Teleport autocomplete
 app.callTeleport = () => {
 	TeleportAutocomplete.init('.my-input').on('change', (cityData) => {
@@ -16,8 +15,9 @@ app.callDarkSky = (latitude, longitude) => {
 		method: 'GET',
 		dataType: 'jsonp',
 		data: {
+			// is that mistook Edamam's data??????
 			q: 'soup',
-			app_id: app.idEdamam,
+			app_id: app.idEdamam, 
 			app_key: app.keyEdamam,
 			health: ['gluten-free']
 		}
@@ -78,8 +78,12 @@ app.events = () => {
 	});
 	$('form').on('submit', (e) => {
 		e.preventDefault();
+		$('#receipeContainer').append('<h3>Here is your recipe!</h3>');
+		$('#receipeContainer').append('recipeChoice');
+		// why they don't work???????
 		if($('.check').is(':checked') == true){
 			$(this).val().push(dietRestrict);
+			// why we have to push here????
 		}
 	});
 	console.log(dietRestrict);
@@ -96,8 +100,6 @@ app.callYummly = (foodChoice) => {
 		dataType : 'jsonp',
 		method: 'GET',
 		data: {
-
-
 			q: foodChoice,
 			_app_id: idYummly,
 			_app_key: keyYummly,
@@ -106,9 +108,6 @@ app.callYummly = (foodChoice) => {
 			// allowedDiet: "386^Vegan", "387^Lacto-ovo vegetarian", "403^Paleo"
 		}
 	}).then((res) => {
-
-	
-
 		var recipeMatches = res.matches;
 		var recipeChoice = recipeMatches[Math.floor(Math.random()*recipeMatches.length)];
 		console.log(recipeChoice);
@@ -124,3 +123,4 @@ app.init = () => {
 
 $(app.init);
 
+// 
