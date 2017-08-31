@@ -16,25 +16,27 @@ app.callDarkSky = (latitude, longitude) => {
 		method: 'GET',
 		dataType: 'jsonp'
 	}).then((res) => {
-		var currentTemp = res.currently.apparentTemperature;
-		app.weatherFilter(currentTemp);
-		console.log(currentTemp);
+		console.log(res);
+		app.currentTemp = $('<h2>').text(Math.round(res.currently.apparentTemperature));
+		app.currentIcon = res.currently.icon;
+		app.currentWeather = $('<h4>').text(res.currently.summary);
+		app.weatherFilter();
 	});
 }
 
 // a function that filters search results based on currentTemp
-app.weatherFilter = (currentTemp) => {
+app.weatherFilter = () => {
 	var foodPicks = [];
-	if(currentTemp <= 0){
+	if(app.currentTemp <= 0){
 		var selectedFoods = ['roast', 'pasta', 'chili', 'pot pie', 'stew', 'winter'];
 	}
-	else if(currentTemp > 0 && currentTemp <= 10){
+	else if(app.currentTemp > 0 && app.currentTemp <= 10){
 		var selectedFoods = ['soup', 'pizza', 'pumpkin', 'apple', 'slow cooker', 'dumpling', 'spicy', 'autumn'];
 	}
-	else if(currentTemp > 10 && currentTemp <= 20){
+	else if(app.currentTemp > 10 && app.currentTemp <= 20){
 		var selectedFoods = ['sushi', 'sandwich', 'breakfast', 'brunch', 'fried', 'spring'];
 	}
-	else if(currentTemp > 20 && currentTemp <= 25){
+	else if(app.currentTemp > 20 && app.currentTemp <= 25){
 		var selectedFoods = ['bbq', 'mexican', 'indian', 'greens', 'curry', 'berries'];
 	}
 	else{
@@ -52,12 +54,10 @@ app.events = () => {
 		allergyRestrict = $(".allergy:checked").map(function(){
 			return $(this).val();
 			}).get();
-			console.log(allergyRestrict);
 		dietRestrict = $(".diet:checked").map(function(){
 			return $(this).val();
 			}).get();
-			// console.log(dietRestrict);
-			console.log(app.foodChoice);
+
 			app.callYummly(app.foodChoice, allergyRestrict, dietRestrict);
 			// console.log(dietRestrict)
 			app.saveRecipes(allergyRestrict);
@@ -66,10 +66,10 @@ app.events = () => {
 
 // ajax call to Yummly
 app.callYummly = (foodChoice, allergyRestrict, dietRestrict) => {
-	var idYummly = '95ec33fc';
-	var keyYummly = '2410ab65b1957770177d384fa57c6070';
-	var urlYummly = 'http://api.yummly.com/v1/api/recipes';
-	var recipeYummly = $.ajax({
+	let idYummly = '95ec33fc';
+	let keyYummly = '2410ab65b1957770177d384fa57c6070';
+	let urlYummly = 'http://api.yummly.com/v1/api/recipes';
+	let recipeYummly = $.ajax({
 		url : urlYummly,
 		dataType : 'jsonp',
 		method: 'GET',
@@ -79,15 +79,16 @@ app.callYummly = (foodChoice, allergyRestrict, dietRestrict) => {
 			_app_key: keyYummly,
 			allowedAllergy: allergyRestrict,
 			allowedDiet: dietRestrict,
-			excludedCourse: ["course^course-Cocktails", "course^course-Condiments and Sauces"],
+			excludedCourse: ["course^course-Cocktails", "course^course-Condiments and Sauces", "course^course-Beverages"],
 		}
 	}).then((res) => {
+		console.log(res);
 		var recipeMatches = res.matches;
 		var recipeChoice = recipeMatches[Math.floor(Math.random()*recipeMatches.length)];
-		console.log(recipeChoice);
+		var recipeId = recipeChoice.id;
+		app.callRecipeInfo(recipeId);
 	})
 }
-
 
 app.saveRecipes = (data) => {
 
@@ -97,12 +98,67 @@ app.saveRecipes = (data) => {
 	
 }
 
+// a function to call and display recipe info for selected item
+app.callRecipeInfo = (recipeId) => {
+	let idYummly = '95ec33fc';
+	let keyYummly = '2410ab65b1957770177d384fa57c6070';
+	let urlYummly = `http://api.yummly.com/v1/api/recipe/${recipeId}`;
+	let recipeYummly = $.ajax({
+		url : urlYummly,
+		dataType : 'jsonp',
+		method: 'GET',
+		data: {
+			_app_id: idYummly,
+			_app_key: keyYummly
+		}
+	}).then((res) => {
+		$('#weatherContainer').empty();
+		let weatherIcon = {};
+			if(app.currentIcon === 'clear-day'){
+				weatherIcon = $('<img>').attr('src', 'dev/assets/clear-day.svg');
+			}
+			else if(app.currentIcon === 'clear-night'){
+				weatherIcon = $('<img>').attr('src', 'dev/assets/clear-night.svg');
+			}
+			else if(app.currentIcon === 'rain'){
+				weatherIcon = $('<img>').attr('src', 'dev/assets/clear-rain.svg');
+			}
+			else if(app.currentIcon === 'snow'){
+				weatherIcon = $('<img>').attr('src', 'dev/assets/clear-snow.svg');
+			}
+			else if(app.currentIcon === 'sleet'){
+				weatherIcon = $('<img>').attr('src', 'dev/assets/clear-sleet.svg');
+			}
+			else if(app.currentIcon === 'wind'){
+				weatherIcon = $('<img>').attr('src', 'dev/assets/wind.svg');
+			}
+			else if(app.currentIcon === 'fog'){
+				weatherIcon = $('<img>').attr('src', 'dev/assets/fog.svg');
+			}
+			else if(app.currentIcon === 'cloudy'){
+				weatherIcon = $('<img>').attr('src', 'dev/assets/cloudy.svg');
+			}
+			else if(app.currentIcon === 'partly-cloudy-day'){
+				weatherIcon = $('<img>').attr('src', 'dev/assets/partly-cloudy-day.svg');
+			}
+			else{
+				weatherIcon = $('<img>').attr('src', 'dev/assets/partly-cloudy-night.svg');
+			}
+		// }
+		$('#weatherContainer').append(app.currentTemp, weatherIcon, app.currentWeather);
+		$('#recipeContainer').empty();
+		let selectedImage = $('<img>').attr('src', res.images[0].hostedLargeUrl);
+		let selectedName = $('<h2>').text(res.name);
+		let selectedTime = $('<h4>').text(res.totalTime);
+		$('#recipeContainer').append(selectedImage, selectedName, selectedTime);
+		res.ingredientLines.forEach( (ingredient) => {
+			$('#recipeContainer').append(`<p>${ingredient}</p>`);
+		});
+		let saveButton = $('<button>').addClass('saveButton').text('Save Recipe');
+		$('#recipeContainer').append(saveButton);
+	});
+}
 
-
-
-
-// dbRef.push(dietRestrict);
-// initialize code
 app.init = () => {
 	app.callTeleport();
 	app.events();
