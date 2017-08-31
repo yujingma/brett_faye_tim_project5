@@ -101,7 +101,39 @@ app.callRecipeInfo = (recipeId) => {
 		}
 	}).then((res) => {
 		$('#weatherContainer').empty();
-		$('#weatherContainer').append(app.currentTemp, app.currentIcon, app.currentWeather);
+		let weatherIcon = () => {
+			if(app.currentIcon === 'clear-day'){
+				return $('<img>').attr('src', '');
+			}
+			if(app.currentIcon === 'clear-night'){
+				return $('<img>').attr('src', '');
+			}
+			if(app.currentIcon === 'rain'){
+				return $('<img>').attr('src', '');
+			}
+			if(app.currentIcon === 'snow'){
+				return $('<img>').attr('src', '');
+			}
+			if(app.currentIcon === 'sleet'){
+				return $('<img>').attr('src', '');
+			}
+			if(app.currentIcon === 'wind'){
+				return $('<img>').attr('src', '');
+			}
+			if(app.currentIcon === 'fog'){
+				return $('<img>').attr('src', '');
+			}
+			if(app.currentIcon === 'cloudy'){
+				return $('<img>').attr('src', '');
+			}
+			if(app.currentIcon === 'partly-cloudy-day'){
+				return $('<img>').attr('src', '');
+			}
+			else(){
+				return $('<img>').attr('src', '');
+			}
+		}
+		$('#weatherContainer').append(app.currentTemp, , app.currentWeather);
 		$('#recipeContainer').empty();
 		let selectedImage = $('<img>').attr('src', res.images[0].hostedLargeUrl);
 		let selectedName = $('<h2>').text(res.name);
