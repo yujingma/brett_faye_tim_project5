@@ -68,12 +68,14 @@ app.events = () => {
 	$('.my-input').on('change', () => {
 		app.callDarkSky();
 	});
-	$('form').on('submit', (e) => {
+	$('.userInfo').on('submit', function(e) {
 		e.preventDefault();
-		if($('.check').is(':checked') == true){
-			$(this).val().push(dietRestrict);
-		}
+		var dietRestrict = $(".check:checked").map(function(){
+		      return $(this).val();
+		    }).get(); 
+		    console.log(dietRestrict);
 	});
+
 	console.log(dietRestrict);
 }
 
@@ -105,6 +107,7 @@ app.callYummly = (foodChoice) => {
 app.init = () => {
 	app.callTeleport();
 	// app.callYummly();
+	app.events();
 };
 
 // document ready
