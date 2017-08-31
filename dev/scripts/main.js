@@ -18,7 +18,7 @@ app.callDarkSky = (latitude, longitude) => {
 	}).then((res) => {
 		var currentTemp = res.currently.apparentTemperature;
 		app.weatherFilter(currentTemp);
-		console.log(currentTemp);
+		console.log(res);
 	});
 }
 
@@ -52,22 +52,19 @@ app.events = () => {
 		allergyRestrict = $(".allergy:checked").map(function(){
 			return $(this).val();
 			}).get();
-			console.log(allergyRestrict);
 		dietRestrict = $(".diet:checked").map(function(){
 			return $(this).val();
 			}).get();
-			console.log(dietRestrict);
-			console.log(app.foodChoice);
 			app.callYummly(app.foodChoice, allergyRestrict, dietRestrict);
 	});
 }
 
 // ajax call to Yummly
 app.callYummly = (foodChoice, allergyRestrict, dietRestrict) => {
-	var idYummly = '95ec33fc';
-	var keyYummly = '2410ab65b1957770177d384fa57c6070';
-	var urlYummly = 'http://api.yummly.com/v1/api/recipes';
-	var recipeYummly = $.ajax({
+	let idYummly = '95ec33fc';
+	let keyYummly = '2410ab65b1957770177d384fa57c6070';
+	let urlYummly = 'http://api.yummly.com/v1/api/recipes';
+	let recipeYummly = $.ajax({
 		url : urlYummly,
 		dataType : 'jsonp',
 		method: 'GET',
@@ -77,13 +74,40 @@ app.callYummly = (foodChoice, allergyRestrict, dietRestrict) => {
 			_app_key: keyYummly,
 			allowedAllergy: allergyRestrict,
 			allowedDiet: dietRestrict,
-			excludedCourse: ["course^course-Cocktails", "course^course-Condiments and Sauces"],
+			excludedCourse: ["course^course-Cocktails", "course^course-Condiments and Sauces", "course^course-Beverages"],
 		}
 	}).then((res) => {
 		var recipeMatches = res.matches;
 		var recipeChoice = recipeMatches[Math.floor(Math.random()*recipeMatches.length)];
-		console.log(recipeChoice);
+		var recipeId = recipeChoice.id;
+		app.callRecipeInfo(recipeId);
 	})
+}
+
+// a function to call recipe info for selected item
+app.callRecipeInfo = (recipeId) => {
+	let idYummly = '95ec33fc';
+	let keyYummly = '2410ab65b1957770177d384fa57c6070';
+	let urlYummly = `http://api.yummly.com/v1/api/recipe/${recipeId}`;
+	let recipeYummly = $.ajax({
+		url : urlYummly,
+		dataType : 'jsonp',
+		method: 'GET',
+		data: {
+			_app_id: idYummly,
+			_app_key: keyYummly
+		}
+	}).then((res) => {
+		console.log(res);
+		$('#recipeContainer').empty();
+		let selectedImage = $('<img>').attr('src', res.images[0].hostedLargeUrl);
+		let selectedName = $('<h2>').text(res.name);
+		let selectedTime = $('<h4>').text(res.totalTime);
+		$('#recipeContainer').append(selectedImage, selectedName, selectedTime);
+		res.ingredientLines.forEach( (ingredient) => {
+			$('#recipeContainer').append(`<p>${ingredient}</p>`);
+		});
+	});
 }
 
 // initialize code
