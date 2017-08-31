@@ -7,6 +7,7 @@ app.callTeleport = () => {
 		app.callDarkSky(latitude, longitude);
 	});
 }
+
 // ajax call to Dark Sky
 app.callDarkSky = (latitude, longitude) => {
 	var keyDarkSky = 'ecb6e7f16bb182021ecf519d1099721a';
@@ -92,5 +93,3 @@ app.init = () => {
 };
 
 $(app.init);
-
-// 
