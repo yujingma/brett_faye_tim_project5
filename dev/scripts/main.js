@@ -17,9 +17,9 @@ app.callDarkSky = (latitude, longitude) => {
 		dataType: 'jsonp'
 	}).then((res) => {
 		console.log(res);
-		app.currentTemp = res.currently.apparentTemperature;
+		app.currentTemp = $('<h2>').text(Math.round(res.currently.apparentTemperature));
 		app.currentIcon = res.currently.icon;
-		app.currentWeather = res.currently.summary;
+		app.currentWeather = $('<h4>').text(res.currently.summary);
 		app.weatherFilter();
 	});
 }
@@ -102,38 +102,38 @@ app.callRecipeInfo = (recipeId) => {
 		}
 	}).then((res) => {
 		$('#weatherContainer').empty();
-		let weatherIcon = () => {
+		let weatherIcon = {};
 			if(app.currentIcon === 'clear-day'){
-				return $('<img>').attr('src', 'dev/assets/clear-day.svg');
+				weatherIcon = $('<img>').attr('src', 'dev/assets/clear-day.svg');
 			}
 			else if(app.currentIcon === 'clear-night'){
-				return $('<img>').attr('src', 'dev/assets/clear-night.svg');
+				weatherIcon = $('<img>').attr('src', 'dev/assets/clear-night.svg');
 			}
 			else if(app.currentIcon === 'rain'){
-				return $('<img>').attr('src', 'dev/assets/clear-rain.svg');
+				weatherIcon = $('<img>').attr('src', 'dev/assets/clear-rain.svg');
 			}
 			else if(app.currentIcon === 'snow'){
-				return $('<img>').attr('src', 'dev/assets/clear-snow.svg');
+				weatherIcon = $('<img>').attr('src', 'dev/assets/clear-snow.svg');
 			}
 			else if(app.currentIcon === 'sleet'){
-				return $('<img>').attr('src', 'dev/assets/clear-sleet.svg');
+				weatherIcon = $('<img>').attr('src', 'dev/assets/clear-sleet.svg');
 			}
 			else if(app.currentIcon === 'wind'){
-				return $('<img>').attr('src', 'dev/assets/wind.svg');
+				weatherIcon = $('<img>').attr('src', 'dev/assets/wind.svg');
 			}
 			else if(app.currentIcon === 'fog'){
-				return $('<img>').attr('src', 'dev/assets/fog.svg');
+				weatherIcon = $('<img>').attr('src', 'dev/assets/fog.svg');
 			}
 			else if(app.currentIcon === 'cloudy'){
-				return $('<img>').attr('src', 'dev/assets/cloudy.svg');
+				weatherIcon = $('<img>').attr('src', 'dev/assets/cloudy.svg');
 			}
 			else if(app.currentIcon === 'partly-cloudy-day'){
-				return $('<img>').attr('src', 'dev/assets/partly-cloudy-day.svg');
+				weatherIcon = $('<img>').attr('src', 'dev/assets/partly-cloudy-day.svg');
 			}
 			else{
-				return $('<img>').attr('src', 'dev/assets/partly-cloudy-night.svg');
+				weatherIcon = $('<img>').attr('src', 'dev/assets/partly-cloudy-night.svg');
 			}
-		}
+		// }
 		$('#weatherContainer').append(app.currentTemp, weatherIcon, app.currentWeather);
 		$('#recipeContainer').empty();
 		let selectedImage = $('<img>').attr('src', res.images[0].hostedLargeUrl);
@@ -143,6 +143,8 @@ app.callRecipeInfo = (recipeId) => {
 		res.ingredientLines.forEach( (ingredient) => {
 			$('#recipeContainer').append(`<p>${ingredient}</p>`);
 		});
+		let saveButton = $('<button>').addClass('saveButton').text('Save Recipe');
+		$('#recipeContainer').append(saveButton);
 	});
 }
 
