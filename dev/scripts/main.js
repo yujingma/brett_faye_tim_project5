@@ -80,6 +80,7 @@ app.callYummly = (foodChoice, allergyRestrict, dietRestrict) => {
 			excludedCourse: ["course^course-Cocktails", "course^course-Condiments and Sauces"],
 		}
 	}).then((res) => {
+		console.log(res);
 		var recipeMatches = res.matches;
 		var recipeChoice = recipeMatches[Math.floor(Math.random()*recipeMatches.length)];
 		console.log(recipeChoice);
