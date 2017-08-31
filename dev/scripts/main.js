@@ -1,5 +1,4 @@
 const app = {};
-
 // call to Teleport autocomplete
 app.callTeleport = () => {
 	TeleportAutocomplete.init('.my-input').on('change', (cityData) => {
@@ -14,7 +13,15 @@ app.callDarkSky = (latitude, longitude) => {
 	var weather = $.ajax({
 		url: `https://api.darksky.net/forecast/${keyDarkSky}/${latitude},${longitude}?units=ca`,
 		method: 'GET',
-		dataType: 'jsonp'
+		dataType: 'jsonp',
+		data: {
+			// is that mistook Edamam's data??????
+			q: 'soup',
+			app_id: app.idEdamam, 
+			app_key: app.keyEdamam,
+			health: ['gluten-free']
+		}
+
 	}).then((res) => {
 		var currentTemp = res.currently.apparentTemperature;
 		app.weatherFilter(currentTemp);
@@ -62,8 +69,6 @@ app.events = () => {
 	});
 }
 
-// a function to wait for all three parameters before calling app.callYummly
-
 // ajax call to Yummly
 app.callYummly = (foodChoice, allergyRestrict, dietRestrict) => {
 	var idYummly = '95ec33fc';
@@ -86,6 +91,7 @@ app.callYummly = (foodChoice, allergyRestrict, dietRestrict) => {
 		var recipeChoice = recipeMatches[Math.floor(Math.random()*recipeMatches.length)];
 		console.log(recipeChoice);
 	})
+
 }
 
 // initialize code
@@ -94,5 +100,6 @@ app.init = () => {
 	app.events();
 };
 
-// document ready
 $(app.init);
+
+// 
