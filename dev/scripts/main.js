@@ -7,21 +7,14 @@ app.callTeleport = () => {
 		app.callDarkSky(latitude, longitude);
 	});
 }
+
 // ajax call to Dark Sky
 app.callDarkSky = (latitude, longitude) => {
 	var keyDarkSky = 'ecb6e7f16bb182021ecf519d1099721a';
 	var weather = $.ajax({
 		url: `https://api.darksky.net/forecast/${keyDarkSky}/${latitude},${longitude}?units=ca`,
 		method: 'GET',
-		dataType: 'jsonp',
-		data: {
-			// is that mistook Edamam's data??????
-			q: 'soup',
-			app_id: app.idEdamam, 
-			app_key: app.keyEdamam,
-			health: ['gluten-free']
-		}
-
+		dataType: 'jsonp'
 	}).then((res) => {
 		var currentTemp = res.currently.apparentTemperature;
 		app.weatherFilter(currentTemp);
@@ -91,7 +84,6 @@ app.callYummly = (foodChoice, allergyRestrict, dietRestrict) => {
 		var recipeChoice = recipeMatches[Math.floor(Math.random()*recipeMatches.length)];
 		console.log(recipeChoice);
 	})
-
 }
 
 // initialize code
@@ -101,5 +93,3 @@ app.init = () => {
 };
 
 $(app.init);
-
-// 
