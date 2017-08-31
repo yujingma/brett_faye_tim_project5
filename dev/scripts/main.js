@@ -56,9 +56,11 @@ app.events = () => {
 		dietRestrict = $(".diet:checked").map(function(){
 			return $(this).val();
 			}).get();
-			console.log(dietRestrict);
+			// console.log(dietRestrict);
 			console.log(app.foodChoice);
 			app.callYummly(app.foodChoice, allergyRestrict, dietRestrict);
+			// console.log(dietRestrict)
+			app.saveRecipes(allergyRestrict);
 	});
 }
 
@@ -86,6 +88,20 @@ app.callYummly = (foodChoice, allergyRestrict, dietRestrict) => {
 	})
 }
 
+
+app.saveRecipes = (data) => {
+
+	var dbRef = firebase.database().ref('/recipes');
+	// console.log(data)
+	dbRef.push(data);
+	
+}
+
+
+
+
+
+// dbRef.push(dietRestrict);
 // initialize code
 app.init = () => {
 	app.callTeleport();
