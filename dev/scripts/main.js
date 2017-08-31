@@ -43,25 +43,6 @@ app.weatherFilter = (currentTemp) => {
 	app.callYummly(foodChoice);
 }
 
-// ajax call to Edamam
-// app.callEdamam = () => {
-// 	var idEdamam = 'a4156de2';
-// 	var keyEdamam = '10efc6df5c7cbcd8288887ca0f20e58c';
-// 	var urlEdamam = 'https://api.edamam.com/search';
-// 	var recipeEdamam = $.ajax({
-// 		url: urlEdamam,
-// 		dataType: 'json',
-// 		method: 'GET',
-// 		data: {
-// 			q: 'soup',
-// 			app_id: idEdamam,
-// 			app_key: keyEdamam
-// 		}
-// 	}).then((res) => {
-// 		console.log(res)
-// 	});
-// }
-
 // a function that gathers dietary restrictions and passes them into an array
 app.events = () => {
 	var dietRestrict = [];
@@ -72,7 +53,7 @@ app.events = () => {
 		e.preventDefault();
 		var dietRestrict = $(".check:checked").map(function(){
 		      return $(this).val();
-		    }).get(); 
+		    }); 
 		    console.log(dietRestrict);
 	});
 
