@@ -100,31 +100,46 @@ header {
 	font-family: $openSans;
 }
 
+.tp-ac__input {
+	font-family: $openSans;
+}
+
 .userInfo {
 	margin: 0 auto;
 }
 
+.foodRestricts {
+	margin: 0 auto;
+	text-align: center;
+}
 
 .foodRestricts img{
 	max-width: 50%;
 }
 
-// form {
-// 	background-image: url(/dev/assets/plateFood.jpg);
-// }
 
 .firstPart, .secondPart {
+
 	width: 100%;	
 }
 
 .peanutFree, .treenutFree, .glutenFree, .seafoodFree, .dairyFree, .eggFree {
-	width: 15%;
+	width: calc(100% / 6);
 	float: left;
+	img {
+		max-width: 60%;
+	}
 }
 
+// .eggFree {
+// 	width: 185px;
+// }
 .soyFree, .seasameFree, .sulfiteFree, .vegetarian, .vegan, .paleo {
-	width: 15%;
+	width: calc(100% / 6);
 	float: left;
+	img {
+		max-width: 60%;
+	}
 }
 
 form {
@@ -141,6 +156,7 @@ form {
 .tp-autocomplete {
 	padding-top: 40px;
 	padding-bottom: 30px;
+	font-family: $openSans;
 }
 
 form img {
@@ -163,9 +179,9 @@ form img {
 	margin: 0 auto;
 }
 
-input[type=checkbox] {
-	opacity: 0;
-}
+// input[type=checkbox] {
+// 	opacity: 0;
+// }
 
 input[type=submit] {
 	margin: 0 auto;
@@ -189,7 +205,10 @@ input[type=submit]:hover {
 
 #resultsContainer {
 	height: auto;
-	background-color: $beige;
+	// background-color: $red;
+	background-image: url('../../dev/assets/sebastien-marchand-232356.jpg');
+	background-size: cover;
+	background-position: center;
 }
 
 #weatherContainer {
