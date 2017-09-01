@@ -1,0 +1,72 @@
+@import "partials/setup";
+
+$lato: 'Lato', sans-serif;
+$openSans: 'Open Sans Condensed', sans-serif;
+
+$lightGreen: #DDE8B9;
+$beige: #E8D2AE;
+$red: #CB8589;
+$brown: #796465;
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+
+.headerWrapper {
+	max-width: 1500px;
+	margin: 0 auto;
+}
+.wrapper {
+	max-width: 1170px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+header {
+	background-image: url('../../dev/assets/elli-o-65548.jpg');
+	background-size: cover;
+	// background-position: 50px 100px;
+	background-repeat: no-repeat;
+	height: 100vh;
+	box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, .25);
+
+}
+
+.headerContainer {
+	width: 500px;
+	text-align: center;
+	color: #DDE8B9;
+	position: relative;
+	h1 {
+		font-family: $lato;
+		font-style: italic;
+		font-weight: 400;
+		font-size: 150px;
+		letter-spacing: 2px;
+	}
+	h2 {
+		padding-top: 50px;
+		font-weight: 400;
+		font-size: 45px;
+		font-family: $openSans;
+		// text-shadow: 0 0 10px black;
+		letter-spacing: 2px;
+	}
+}
+
+.title {
+	position: absolute;
+	margin-top: 35%;
+}
+
+.tp-autocomplete {
+	margin: 0 auto;
+	font-family: $openSans;
+}
+
+.userInfo {
+	margin: 0 auto;
+}

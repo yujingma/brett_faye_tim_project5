@@ -1,5 +1,6 @@
 const app = {};
 // call to Teleport autocomplete
+
 app.callTeleport = () => {
 	TeleportAutocomplete.init('.my-input').on('change', (cityData) => {
 		var latitude = cityData.latitude;
