@@ -2,25 +2,29 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>brett_faye_tim_project5</title>
+	<title>Weather We Eat?</title>
 	<link rel="stylesheet" href="dev/plugins/teleport/teleport-autocomplete.css">
 	<link rel="stylesheet" href="public/styles/style.css">
-	<link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700|Open+Sans+Condensed:300,700" rel="stylesheet">
+	<!-- <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700|Open+Sans+Condensed:300,700" rel="stylesheet"> -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700|Slabo+27px" rel="stylesheet">
 </head>
 <body>
 	<header>
+			<div class="overlay">
 		<div class="headerWrapper">
-			<div class="headerContainer">
-				<div class="title">
-					<h1>Weather We Eat?</h1>
-					<h2>The app that gives you the best recipe based on your weather!</h2>
+				<div class="headerContainer">
+					<div class="title">
+						<h1>Weather We Eat?</h1>
+						<h2>The app that gives you the best recipe based on your weather!</h2>
+						<a href="#userInfo"><button id ="getStarted">Get Started!</button></a>
+					</div>
 				</div>
 			</div>
 		</div>
 	</header>
 	<main>
 		<div class="wrapper">
-			<form class="userInfo">
+			<form class="userInfo" id="userInfo">
 				<div class="tp-autocomplete">
 					<input type="text" class="my-input tp-ac__input" placeholder="Pick your city" autocomplete="off" data-com.agilebits.onepassword.user-edited="yes">
 					<ul class="tp-ac__list"></ul>
@@ -60,12 +64,28 @@
 		</div>
 	</main>
 	<footer>
-		<div class="upperFooter">
-			<img src="" alt="logo image">
-			<h3>feels like soup</h3>
-		</div>
-		<div class="lowerFooter">
-			<p>Created by Brett Nielsen, Faye Ma & Tim Lemke. Powered by the DarkSky, Yummly and Teleport public APIs</p>
+		<div class="wrapper">
+			<div class="footerContainer clearfix">
+				<div class="footerLeft">
+					<p>Header photo by <a href="https://unsplash.com/@punttim" target="_blank">Tim Goaw</a> at <a href="https://unsplash.com/search/photos/toronto?photo=sfUxCShoKbE" target="_blank">Unsplash</a></p>
+					<p>Pick a cuisine photo by <a href="https://unsplash.com/@markjparaan">Mark Jefferson</a> at <a href="https://unsplash.com/search/photos/toronto?photo=UR7RzFRXcrU" target="_blank">Unsplash</a></p>
+					<p>Plate and knife logo by <a href="https://thenounproject.com/hanne01/" target="_blank">Hanne</a> at <a href="https://thenounproject.com/hanne01/collection/dishes/?oq=plate%20and%20cutlery&cidx=15">The Noun Project</a></p>
+				</div>
+				<div class="footerCenter">
+					<p>Powered by:</p>
+					<a href=""><img class="darkSky" src="dev/assets/darkSkyBeige.png" alt="Dark Sky Api Logo"></a>
+					<a href=""><img class="teleport" src="dev/assets/teleportLogoBeige.png" alt="Teleport Api Logo"></a>
+					<a href=""><img class="yummily" src="dev/assets/yummilyBeige.png" alt="Yummily Api Logo"></a>
+					<h3> &copy; 2017 Weather We Eat?</h3>
+				</div>
+				<div class="footerRight">
+					<p>Built by:</p>
+					<p>
+						<a href="http://www.brettnielsen.ca">Brett Nielsen</a>, 
+						<a href="http://www.fayeyujingma.ca">Faye Ma</a> & 
+						<a href="http://www.timlemke.ca">Tim Lemke</a>
+					</p>
+				</div>
 		</div>
 	</footer>
 <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
