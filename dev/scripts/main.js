@@ -146,6 +146,34 @@ app.callRecipeInfo = (recipeId) => {
 	});
 }
 
+// General smooth scroll code inspired by: https://css-tricks.com/snippets/jquery/smooth-scrolling/
+$('a[href*="#"]')
+  // Remove links that don't actually link to anything
+  .not('[href="#"]').not('[href="#0"]').click(function(event) {
+    // On-page links
+    if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+      // Figure out element to scroll to
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+      if (target.length) {
+        event.preventDefault();
+        $('html, body').animate({
+          scrollTop: target.offset().top
+        }, 700, function() {
+          var $target = $(target);
+          $target.focus();
+          if ($target.is(":focus")) { 
+            return false;
+          } else {
+            $target.attr('tabindex', '-1'); 
+            // Adding tabindex for elements not focusable
+            $target.focus(); // Set focus again
+          };
+        });
+      }
+    }
+  });
+
 // initialize code
 app.init = () => {
 	app.callTeleport();
