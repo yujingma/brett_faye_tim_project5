@@ -164,7 +164,21 @@ form img {
 }
 
 input[type=checkbox] {
-	opacity: 0;
+	appearance: none;
+	width: 25px;
+	height: 25px;
+	background: $red;
+	border-radius: 50%;
+	color: $brown;
+	position: relative;
+	box-shadow: 0 0 5px $brown;
+	&:checked::after{
+		position: absolute;
+		content: '\26D2';
+		font-size: 29px;
+		right: -2px;
+		bottom: -6px;
+	}
 }
 
 input[type=submit] {
