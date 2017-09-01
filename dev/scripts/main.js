@@ -16,7 +16,8 @@ app.callDarkSky = (latitude, longitude) => {
 		method: 'GET',
 		dataType: 'jsonp'
 	}).then((res) => {
-		app.currentTemp = Math.round(res.currently.apparentTemperature);
+		console.log(res);
+		app.currentTemp = $('<h2>').text(Math.round(res.currently.apparentTemperature));
 		app.currentIcon = res.currently.icon;
 		app.currentWeather = $('<h4>').text(res.currently.summary);
 		app.weatherFilter();
@@ -56,7 +57,12 @@ app.events = () => {
 		dietRestrict = $(".diet:checked").map(function(){
 			return $(this).val();
 			}).get();
+
 			app.callYummly(app.foodChoice, allergyRestrict, dietRestrict);
+			// console.log(dietRestrict)
+			
+
+
 	});
 }
 
@@ -78,11 +84,32 @@ app.callYummly = (foodChoice, allergyRestrict, dietRestrict) => {
 			excludedCourse: ["course^course-Cocktails", "course^course-Condiments and Sauces", "course^course-Beverages"],
 		}
 	}).then((res) => {
+		console.log(res);
 		var recipeMatches = res.matches;
 		var recipeChoice = recipeMatches[Math.floor(Math.random()*recipeMatches.length)];
 		var recipeId = recipeChoice.id;
 		app.callRecipeInfo(recipeId);
+		app.saveRecipes(recipeChoice);
 	})
+}
+
+app.saveRecipes = (data) => {
+
+	var dbRef = firebase.database().ref('/recipes');
+	// console.log(data)
+	// dbRef.push(data);
+	dbRef.on('value', (data) => {
+  		// Why the value doesn't work
+  		dbRef.push('pizza')
+		$('.saveButton').on('click', function(e) {
+			e.preventDefault();
+			
+			app.callYummly();
+			var recipeResults = $('').val();
+			app.saveRecipes(recipeResults);
+
+		});
+	});	
 }
 
 // a function to call and display recipe info for selected item
@@ -131,7 +158,8 @@ app.callRecipeInfo = (recipeId) => {
 			else{
 				weatherIcon = $('<img>').attr('src', 'dev/assets/partly-cloudy-night.svg');
 			}
-		$('#weatherContainer').append(`<h2>${app.currentTemp}</h2>`, weatherIcon, app.currentWeather);
+		// }
+		$('#weatherContainer').append(app.currentTemp, weatherIcon, app.currentWeather);
 		$('#recipeContainer').empty();
 		let selectedImage = $('<img>').attr('src', res.images[0].hostedLargeUrl);
 		let selectedName = $('<h2>').text(res.name);
@@ -142,10 +170,12 @@ app.callRecipeInfo = (recipeId) => {
 		});
 		let saveButton = $('<button>').addClass('saveButton').text('Save Recipe');
 		$('#recipeContainer').append(saveButton);
+
+
+
 	});
 }
 
-// initialize code
 app.init = () => {
 	app.callTeleport();
 	app.events();
