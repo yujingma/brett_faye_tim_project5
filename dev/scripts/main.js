@@ -60,7 +60,9 @@ app.events = () => {
 
 			app.callYummly(app.foodChoice, allergyRestrict, dietRestrict);
 			// console.log(dietRestrict)
-			app.saveRecipes(allergyRestrict);
+			
+
+
 	});
 }
 
@@ -87,6 +89,7 @@ app.callYummly = (foodChoice, allergyRestrict, dietRestrict) => {
 		var recipeChoice = recipeMatches[Math.floor(Math.random()*recipeMatches.length)];
 		var recipeId = recipeChoice.id;
 		app.callRecipeInfo(recipeId);
+		app.saveRecipes(recipeChoice);
 	})
 }
 
@@ -94,8 +97,19 @@ app.saveRecipes = (data) => {
 
 	var dbRef = firebase.database().ref('/recipes');
 	// console.log(data)
-	dbRef.push(data);
-	
+	// dbRef.push(data);
+	dbRef.on('value', (data) => {
+  		// Why the value doesn't work
+  		dbRef.push('pizza')
+		$('.saveButton').on('click', function(e) {
+			e.preventDefault();
+			
+			app.callYummly();
+			var recipeResults = $('').val();
+			app.saveRecipes(recipeResults);
+
+		});
+	});	
 }
 
 // a function to call and display recipe info for selected item
@@ -156,6 +170,9 @@ app.callRecipeInfo = (recipeId) => {
 		});
 		let saveButton = $('<button>').addClass('saveButton').text('Save Recipe');
 		$('#recipeContainer').append(saveButton);
+
+
+
 	});
 }
 
