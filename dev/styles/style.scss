@@ -203,6 +203,28 @@ input[type=submit]:hover {
 	font-weight: bolder;
 }
 
+input[type=checkbox] {
+    appearance: none;
+    width: 21px;
+    height: 21px;
+    background: $red;
+    border-radius: 50%;
+    color: $brown;
+    position: relative;
+    box-shadow: 0 0 5px $brown;
+    &:checked::after{
+    	// background: $lightGreen;
+        position: absolute;
+        content: 'X';
+        color: $beige;
+        font-weight: 700;
+        font-size: 18px;
+        left: 6px;
+        // top: 0px;
+        bottom: 0px;
+    }
+}
+
 #resultsContainer {
 	height: auto;
 	// background-color: $red;
