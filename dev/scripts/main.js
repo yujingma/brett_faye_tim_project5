@@ -170,7 +170,9 @@ $('a[href*="#"]')
 // a function that displays our information on the page
 app.display = (res) => {
 	$('#weatherContainer').empty();
-	$('#weatherContainer').append(app.currentTemp, app.weatherIcon, app.currentWeather);
+	$('#weatherContainer').append(`<p>${app.currentTemp}&deg;C</p>`);
+	$('#weatherContainer').append(app.currentWeather);
+	$('#weatherContainer').append(app.weatherIcon);
 	$('#recipeContainer').empty();
 	let selectedImage = $('<img>').attr('src', res.images[0].hostedLargeUrl);
 	let selectedName = $('<h2>').text(res.name);

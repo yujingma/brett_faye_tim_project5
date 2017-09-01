@@ -100,7 +100,49 @@ header {
 	margin: 0 auto;
 }
 
+#resultsContainer {
+	height: auto;
+	background-color: $beige;
+}
+
+#weatherContainer {
+	text-align: center;
+	width: 33.33%;
+	float: right;
+	text-align: center;
+	font-family: $openSans;
+
+	font-weight: bold;
+	p {
+
+		font-size: 50px;
+		float: right;
+	}
+	h4 {
+		font-size: 40px;
+		float-right: 40px;
+	}
+	img {
+		width: 200px;
+		// float: left;
+		// width: 200px;
+		// margin-right: -80px;
+	}
+
+}
+
+#recipeContainer {
+	float: left;
+	width: 66.66%;
+	h2 {
+		font-size: 50px;
+	}
+}
+
+
+
 footer {
+	clear: both;
 	font-family: $openSans;
 	color: $beige;
 	background-color: $brown;
