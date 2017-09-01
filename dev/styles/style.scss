@@ -2,6 +2,7 @@
 
 $lato: 'Lato', sans-serif;
 $openSans: 'Open Sans Condensed', sans-serif;
+$slabo: 'Slabo 27px', serif;
 
 $lightGreen: #DDE8B9;
 $beige: #E8D2AE;
@@ -14,6 +15,16 @@ $brown: #796465;
 	box-sizing: border-box;
 }
 
+button {
+	width: 150px;
+	height: 40px;
+	border-radius: 25px;
+	border: none;
+}
+
+a {
+	text-decoration: none;
+}
 
 .headerWrapper {
 	max-width: 1500px;
@@ -22,7 +33,6 @@ $brown: #796465;
 .wrapper {
 	max-width: 1170px;
 	margin: 0 auto;
-	text-align: center;
 }
 
 img {
@@ -34,8 +44,10 @@ header {
 	background-size: cover;
 	// background-position: 50px 100px;
 	background-repeat: no-repeat;
-	height: 100vh;
-	box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, .25);
+	height: 1000px;
+	// box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, .25);
+	box-shadow: inset 0 0 0 1000px rgba(121, 100, 101, 0.5);
+
 
 }
 
@@ -45,25 +57,42 @@ header {
 	color: #DDE8B9;
 	position: relative;
 	h1 {
-		font-family: $lato;
+		color: $beige;
+		font-family: $slabo;
 		font-style: italic;
 		font-weight: 400;
 		font-size: 150px;
 		letter-spacing: 2px;
+		text-shadow: 0 0 2px $brown;
+		// text-transform: uppercase;
 	}
 	h2 {
-		padding-top: 50px;
+		padding-top: 30px;
 		font-weight: 400;
 		font-size: 45px;
 		font-family: $openSans;
-		// text-shadow: 0 0 10px black;
+		text-shadow: 0 0 2px $brown;
 		letter-spacing: 2px;
 	}
 }
-
+.overlay {
+	box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.1);
+	height: 1000px;
+}
 .title {
 	position: absolute;
-	margin-top: 35%;
+	margin-top: 40%;
+	margin-left: 5%;
+}
+
+#getStarted {
+	font-family: $openSans;
+	color: $brown;
+	font-weight: 400;
+	font-size: 20px;
+	letter-spacing: 2px;
+	background-color: $beige;
+	margin-top: 50px;
 }
 
 .tp-autocomplete {
@@ -74,6 +103,7 @@ header {
 .userInfo {
 	margin: 0 auto;
 }
+
 
 .foodRestricts img{
 	max-width: 50%;
@@ -157,6 +187,105 @@ input[type=submit]:hover {
 	font-weight: bolder;
 }
 
+#resultsContainer {
+	height: auto;
+	background-color: $beige;
+}
+
+#weatherContainer {
+	text-align: center;
+	width: 33.33%;
+	float: right;
+	text-align: center;
+	font-family: $openSans;
+
+	font-weight: bold;
+	p {
+
+		font-size: 50px;
+		float: right;
+	}
+	h4 {
+		font-size: 40px;
+		float-right: 40px;
+	}
+	img {
+		width: 200px;
+		// float: left;
+		// width: 200px;
+		// margin-right: -80px;
+	}
+
+}
+
+#recipeContainer {
+	float: left;
+	width: 66.66%;
+	h2 {
+		font-size: 50px;
+	}
+}
 
 
+
+footer {
+	clear: both;
+	font-family: $openSans;
+	color: $beige;
+	background-color: $brown;
+}
+
+
+
+.footerLeft {
+	width: 33.33%;
+	float: left;
+	padding-top: 40px;
+
+	a {
+		color: $beige;
+	}
+}
+
+.footerCenter {
+	// margin: 0 auto;
+	width: 33.33%;
+	float: left;
+	text-align: center;
+	p {
+		padding-top: 15px;
+		padding-bottom: 15px;
+		font-size: 15px;
+	}
+	h3 {
+		font-weight: 400;
+		font-size: 15px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+}
+
+.teleport {
+	width: 65px;
+	margin-right: 17px;
+}
+
+.darkSky {
+	width: 40px;
+	margin-right: 15px;
+}
+
+.yummily {
+	width: 38px;
+}
+
+.footerRight {
+	width: 33.33%;
+	text-align: right;
+	float: right;
+	padding-top: 40px;
+	a {
+		color: $beige;
+	}
+}
 
