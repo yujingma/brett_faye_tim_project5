@@ -3,16 +3,16 @@ const app = {};
 
 app.callTeleport = () => {
 	TeleportAutocomplete.init('.my-input').on('change', (cityData) => {
-		var latitude = cityData.latitude;
-		var longitude = cityData.longitude;
+		let latitude = cityData.latitude;
+		let longitude = cityData.longitude;
 		app.callDarkSky(latitude, longitude);
 	});
 }
 
 // ajax call to Dark Sky
 app.callDarkSky = (latitude, longitude) => {
-	var keyDarkSky = 'ecb6e7f16bb182021ecf519d1099721a';
-	var weather = $.ajax({
+	let keyDarkSky = 'ecb6e7f16bb182021ecf519d1099721a';
+	let weather = $.ajax({
 		url: `https://api.darksky.net/forecast/${keyDarkSky}/${latitude},${longitude}?units=ca`,
 		method: 'GET',
 		dataType: 'jsonp'
@@ -26,7 +26,7 @@ app.callDarkSky = (latitude, longitude) => {
 
 // a function that filters search results based on currentTemp
 app.weatherFilter = () => {
-	var foodPicks = [];
+	let foodPicks = [];
 	if(app.currentTemp <= 0){
 		var selectedFoods = ['roast', 'pasta', 'chili', 'pot pie', 'stew', 'winter'];
 	}
@@ -59,6 +59,10 @@ app.events = () => {
 			}).get();
 			app.callYummly(app.foodChoice, allergyRestrict, dietRestrict);
 	});
+	$('#recipeContainer').on('click', '.saveButton', (e) => {
+		e.preventDefault();
+		app.saveRecipes();
+	});
 }
 
 // ajax call to Yummly
@@ -79,14 +83,14 @@ app.callYummly = (foodChoice, allergyRestrict, dietRestrict) => {
 			excludedCourse: ["course^course-Cocktails", "course^course-Condiments and Sauces", "course^course-Beverages"],
 		}
 	}).then((res) => {
-		var recipeMatches = res.matches;
-		var recipeChoice = recipeMatches[Math.floor(Math.random()*recipeMatches.length)];
-		var recipeId = recipeChoice.id;
+		let recipeMatches = res.matches;
+		let recipeChoice = recipeMatches[Math.floor(Math.random()*recipeMatches.length)];
+		let recipeId = recipeChoice.id;
 		app.callRecipeInfo(recipeId);
 	})
 }
 
-// a function to call and display recipe info for selected item
+// a function to call recipe info for selected item
 app.callRecipeInfo = (recipeId) => {
 	let idYummly = '95ec33fc';
 	let keyYummly = '2410ab65b1957770177d384fa57c6070';
@@ -100,49 +104,38 @@ app.callRecipeInfo = (recipeId) => {
 			_app_key: keyYummly
 		}
 	}).then((res) => {
-		$('#weatherContainer').empty();
-		let weatherIcon = {};
+		app.weatherIcon = {};
 			if(app.currentIcon === 'clear-day'){
-				weatherIcon = $('<img>').attr('src', 'dev/assets/clear-day.svg');
+				app.weatherIcon = $('<img>').attr('src', 'dev/assets/clear-day.svg');
 			}
 			else if(app.currentIcon === 'clear-night'){
-				weatherIcon = $('<img>').attr('src', 'dev/assets/clear-night.svg');
+				app.weatherIcon = $('<img>').attr('src', 'dev/assets/clear-night.svg');
 			}
 			else if(app.currentIcon === 'rain'){
-				weatherIcon = $('<img>').attr('src', 'dev/assets/clear-rain.svg');
+				app.weatherIcon = $('<img>').attr('src', 'dev/assets/clear-rain.svg');
 			}
 			else if(app.currentIcon === 'snow'){
-				weatherIcon = $('<img>').attr('src', 'dev/assets/clear-snow.svg');
+				app.weatherIcon = $('<img>').attr('src', 'dev/assets/clear-snow.svg');
 			}
 			else if(app.currentIcon === 'sleet'){
-				weatherIcon = $('<img>').attr('src', 'dev/assets/clear-sleet.svg');
+				app.weatherIcon = $('<img>').attr('src', 'dev/assets/clear-sleet.svg');
 			}
 			else if(app.currentIcon === 'wind'){
-				weatherIcon = $('<img>').attr('src', 'dev/assets/wind.svg');
+				app.weatherIcon = $('<img>').attr('src', 'dev/assets/wind.svg');
 			}
 			else if(app.currentIcon === 'fog'){
-				weatherIcon = $('<img>').attr('src', 'dev/assets/fog.svg');
+				app.weatherIcon = $('<img>').attr('src', 'dev/assets/fog.svg');
 			}
 			else if(app.currentIcon === 'cloudy'){
-				weatherIcon = $('<img>').attr('src', 'dev/assets/cloudy.svg');
+				app.weatherIcon = $('<img>').attr('src', 'dev/assets/cloudy.svg');
 			}
 			else if(app.currentIcon === 'partly-cloudy-day'){
-				weatherIcon = $('<img>').attr('src', 'dev/assets/partly-cloudy-day.svg');
+				app.weatherIcon = $('<img>').attr('src', 'dev/assets/partly-cloudy-day.svg');
 			}
 			else{
-				weatherIcon = $('<img>').attr('src', 'dev/assets/partly-cloudy-night.svg');
+				app.weatherIcon = $('<img>').attr('src', 'dev/assets/partly-cloudy-night.svg');
 			}
-		$('#weatherContainer').append(`<h2>${app.currentTemp}</h2>`, weatherIcon, app.currentWeather);
-		$('#recipeContainer').empty();
-		let selectedImage = $('<img>').attr('src', res.images[0].hostedLargeUrl);
-		let selectedName = $('<h2>').text(res.name);
-		let selectedTime = $('<h4>').text(res.totalTime);
-		$('#recipeContainer').append(selectedImage, selectedName, selectedTime);
-		res.ingredientLines.forEach( (ingredient) => {
-			$('#recipeContainer').append(`<p>${ingredient}</p>`);
-		});
-		let saveButton = $('<button>').addClass('saveButton').text('Save Recipe');
-		$('#recipeContainer').append(saveButton);
+		app.display(res);
 	});
 }
 
@@ -174,10 +167,35 @@ $('a[href*="#"]')
     }
   });
 
-// initialize code
+// a function that displays our information on the page
+app.display = (res) => {
+	$('#weatherContainer').empty();
+	$('#weatherContainer').append(app.currentTemp, app.weatherIcon, app.currentWeather);
+	$('#recipeContainer').empty();
+	let selectedImage = $('<img>').attr('src', res.images[0].hostedLargeUrl);
+	let selectedName = $('<h2>').text(res.name);
+	let selectedTime = $('<h4>').text(res.totalTime);
+	let selectedUrl = $('<a>').attr('href', res.source.sourceRecipeUrl).text('Link to full recipe');
+	$('#recipeContainer').append(selectedImage, selectedName, selectedTime, selectedUrl);
+	res.ingredientLines.forEach( (ingredient) => {
+		$('#recipeContainer').append(`<p>${ingredient}</p>`);
+	});
+	let saveButton = $('<button>').addClass('saveButton').text('Save Recipe');
+	$('#recipeContainer').append(saveButton);
+	app.selectedRecipe = res;
+}
+
+// a function that saves a selected recipe to firebase
+app.saveRecipes = () => {
+	var dbRef = firebase.database().ref();
+	dbRef.push(app.selectedRecipe);
+}
+
+// a function that initializes our code
 app.init = () => {
 	app.callTeleport();
 	app.events();
 };
 
+// document ready
 $(app.init);
