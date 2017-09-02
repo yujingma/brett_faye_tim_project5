@@ -118,18 +118,17 @@ header {
 }
 
 .peanutFree, .treenutFree, .glutenFree, .seafoodFree, .dairyFree, .eggFree {
-	width: 15%;
+	width: calc(100% / 6);
 	float: left;
 }
 
 .soyFree, .seasameFree, .sulfiteFree, .vegetarian, .vegan, .paleo {
-	width: 15%;
+	width: calc(100% / 6);
 	float: left;
 }
 
 form {
 	background: $beige;
-	// height: 500px;
 	min-width: 100%;
 	margin: 0;
 	padding-bottom: 50px;
@@ -144,23 +143,28 @@ form {
 }
 
 form img {
-	color: white;
+
 }
 
-.vegetarian img {
-	width: 45%;
-} 
+.soyFree img{
+	width: 80%;
+	display: block;
+}
+
+.eggFree img {
+	width: 80%;
+	display: block;
+}
 
 .vegan img {
-	width: 45%;
+	// width: 45%;
 	display: block;
-	margin: 0 auto;
+	// margin: 0 auto;
 }
 
 .paleo img {
-	width: 48%;
+	// width: 48%;
 	display: block;
-	margin: 0 auto;
 }
 
 input[type=checkbox] {
