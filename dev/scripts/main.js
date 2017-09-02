@@ -28,21 +28,25 @@ app.callDarkSky = (latitude, longitude) => {
 app.weatherFilter = () => {
 	let foodPicks = [];
 	if(app.currentTemp <= 0){
-		var selectedFoods = ['roast', 'pasta', 'chili', 'pot pie', 'stew', 'winter'];
+		app.selectedFoods = ['roast', 'pasta', 'chili', 'pot pie', 'stew', 'winter'];
 	}
 	else if(app.currentTemp > 0 && app.currentTemp <= 10){
-		var selectedFoods = ['soup', 'pizza', 'pumpkin', 'apple', 'slow cooker', 'dumpling', 'spicy', 'autumn'];
+		app.selectedFoods = ['soup', 'pizza', 'pumpkin', 'apple', 'slow cooker', 'dumpling', 'spicy', 'autumn'];
 	}
 	else if(app.currentTemp > 10 && app.currentTemp <= 20){
-		var selectedFoods = ['sushi', 'sandwich', 'breakfast', 'brunch', 'fried', 'spring'];
+		app.selectedFoods = ['sushi', 'sandwich', 'breakfast', 'brunch', 'fried', 'spring'];
 	}
 	else if(app.currentTemp > 20 && app.currentTemp <= 25){
-		var selectedFoods = ['bbq', 'mexican', 'indian', 'greens', 'curry', 'berries'];
+		app.selectedFoods = ['bbq', 'mexican', 'indian', 'greens', 'curry', 'berries'];
 	}
 	else{
-		var selectedFoods = ['salad', 'ice cream', 'cool', 'cucumber', 'summer', 'watermelon'];
+		app.selectedFoods = ['salad', 'ice cream', 'cool', 'cucumber', 'summer', 'watermelon'];
 	}
-	app.foodChoice = selectedFoods[Math.floor(Math.random()*selectedFoods.length)];
+}
+
+// function that chooses a random food category
+app.randomCategory = () => {
+	app.foodChoice = app.selectedFoods[Math.floor(Math.random()*app.selectedFoods.length)];
 }
 
 // a function that gathers dietary restrictions and passes them into an array
@@ -51,6 +55,7 @@ app.events = () => {
 	let dietRestrict = [];
 	$('.userInfo').on('submit', function(e) {
 		e.preventDefault();
+		app.randomCategory();
 		allergyRestrict = $(".allergy:checked").map(function(){
 			return $(this).val();
 			}).get();
@@ -75,7 +80,7 @@ app.callYummly = (foodChoice, allergyRestrict, dietRestrict) => {
 		dataType : 'jsonp',
 		method: 'GET',
 		data: {
-			q: foodChoice,
+			q: app.foodChoice,
 			_app_id: idYummly,
 			_app_key: keyYummly,
 			allowedAllergy: allergyRestrict,
@@ -165,7 +170,7 @@ $('a[href*="#"]')
         });
       }
     }
-  });
+});
 
 // a function that displays our information on the page
 app.display = (res) => {
