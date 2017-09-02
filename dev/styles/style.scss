@@ -100,31 +100,46 @@ header {
 	font-family: $openSans;
 }
 
+.tp-ac__input {
+	font-family: $openSans;
+}
+
 .userInfo {
 	margin: 0 auto;
 }
 
+.foodRestricts {
+	margin: 0 auto;
+	text-align: center;
+}
 
 .foodRestricts img{
 	max-width: 50%;
 }
 
-// form {
-// 	background-image: url(/dev/assets/plateFood.jpg);
-// }
 
 .firstPart, .secondPart {
+
 	width: 100%;	
 }
 
 .peanutFree, .treenutFree, .glutenFree, .seafoodFree, .dairyFree, .eggFree {
-	width: 15%;
+	width: calc(100% / 6);
 	float: left;
+	img {
+		max-width: 60%;
+	}
 }
 
+// .eggFree {
+// 	width: 185px;
+// }
 .soyFree, .seasameFree, .sulfiteFree, .vegetarian, .vegan, .paleo {
-	width: 15%;
+	width: calc(100% / 6);
 	float: left;
+	img {
+		max-width: 60%;
+	}
 }
 
 form {
@@ -141,6 +156,7 @@ form {
 .tp-autocomplete {
 	padding-top: 40px;
 	padding-bottom: 30px;
+	font-family: $openSans;
 }
 
 form img {
@@ -163,23 +179,9 @@ form img {
 	margin: 0 auto;
 }
 
-input[type=checkbox] {
-	appearance: none;
-	width: 25px;
-	height: 25px;
-	background: $red;
-	border-radius: 50%;
-	color: $brown;
-	position: relative;
-	box-shadow: 0 0 5px $brown;
-	&:checked::after{
-		position: absolute;
-		content: '\26D2';
-		font-size: 29px;
-		right: -2px;
-		bottom: -6px;
-	}
-}
+// input[type=checkbox] {
+// 	opacity: 0;
+// }
 
 input[type=submit] {
 	margin: 0 auto;
@@ -201,9 +203,34 @@ input[type=submit]:hover {
 	font-weight: bolder;
 }
 
+input[type=checkbox] {
+    appearance: none;
+    width: 21px;
+    height: 21px;
+    background: $red;
+    border-radius: 50%;
+    color: $brown;
+    position: relative;
+    box-shadow: 0 0 5px $brown;
+    &:checked::after{
+    	// background: $lightGreen;
+        position: absolute;
+        content: 'X';
+        color: $beige;
+        font-weight: 700;
+        font-size: 18px;
+        left: 6px;
+        // top: 0px;
+        bottom: 0px;
+    }
+}
+
 #resultsContainer {
 	height: auto;
-	background-color: $beige;
+	// background-color: $red;
+	background-image: url('../../dev/assets/sebastien-marchand-232356.jpg');
+	background-size: cover;
+	background-position: center;
 }
 
 #weatherContainer {
