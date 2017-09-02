@@ -109,6 +109,12 @@ app.callRecipeInfo = (recipeId) => {
 			_app_key: keyYummly
 		}
 	}).then((res) => {
+		app.chooseIcon(res)
+	});
+}
+
+// a function that chooses an icon to display based on the weather
+app.chooseIcon = (res) => {
 		app.weatherIcon = {};
 			if(app.currentIcon === 'clear-day'){
 				app.weatherIcon = $('<img>').attr('src', 'dev/assets/clear-day.svg');
@@ -141,36 +147,9 @@ app.callRecipeInfo = (recipeId) => {
 				app.weatherIcon = $('<img>').attr('src', 'dev/assets/partly-cloudy-night.svg');
 			}
 		app.display(res);
-	});
+
 }
 
-// General smooth scroll code inspired by: https://css-tricks.com/snippets/jquery/smooth-scrolling/
-$('a[href*="#"]')
-  // Remove links that don't actually link to anything
-  .not('[href="#"]').not('[href="#0"]').click(function(event) {
-    // On-page links
-    if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
-      // Figure out element to scroll to
-      var target = $(this.hash);
-      target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-      if (target.length) {
-        event.preventDefault();
-        $('html, body').animate({
-          scrollTop: target.offset().top
-        }, 700, function() {
-          var $target = $(target);
-          $target.focus();
-          if ($target.is(":focus")) { 
-            return false;
-          } else {
-            $target.attr('tabindex', '-1'); 
-            // Adding tabindex for elements not focusable
-            $target.focus(); // Set focus again
-          };
-        });
-      }
-    }
-});
 
 // a function that displays our information on the page
 app.display = (res) => {
@@ -191,6 +170,34 @@ app.display = (res) => {
 	$('#recipeContainer').append(saveButton);
 	app.selectedRecipe = res;
 }
+
+// General smooth scroll code inspired by: https://css-tricks.com/snippets/jquery/smooth-scrolling/
+$('a[href*="#"]')
+// Remove links that don't actually link to anything
+.not('[href="#"]').not('[href="#0"]').click(function(event) {
+// On-page links
+	if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+	// Figure out element to scroll to
+		var target = $(this.hash);
+		target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+		if (target.length) {
+			event.preventDefault();
+			$('html, body').animate({
+				scrollTop: target.offset().top
+			}, 700, function() {
+			var $target = $(target);
+			$target.focus();
+				if ($target.is(":focus")) { 
+				return false;
+				} else {
+				$target.attr('tabindex', '-1'); 
+				// Adding tabindex for elements not focusable
+				$target.focus(); // Set focus again
+				};
+			});
+		}
+	}
+});
 
 // a function that saves a selected recipe to firebase
 app.saveRecipes = () => {
