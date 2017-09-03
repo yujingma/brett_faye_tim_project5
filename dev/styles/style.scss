@@ -8,6 +8,7 @@ $lightGreen: #DDE8B9;
 $beige: #E8D2AE;
 $red: #CB8589;
 $brown: #796465;
+$darkerBrown: #392F30;
 
 * {
 	margin: 0;
@@ -112,6 +113,7 @@ header {
 
 .userInfo {
 	margin: 0 auto;
+	background-image: url('../../dev/assets/debut-light.png');
 }
 
 .foodRestricts {
@@ -228,9 +230,14 @@ input[type=checkbox] {
 
 #resultsContainer {
 	height: auto;
+	// background-color: $brown;	
 	// background-color: $red;
-	background-image: url('../../dev/assets/tabelImage.jpg');
-	background-size: cover;
+	// background-image: url('../../dev/assets/tim-gouw-165094.jpg');
+	background-color: #796465;
+	background-image: url('../../dev/assets/arches.png');
+	// background-color: $brown;
+
+	// background-size: cover;
 	background-position: center;
 }
 
@@ -242,7 +249,7 @@ input[type=checkbox] {
 	font-family: $openSans;
 	font-weight: bold;
 	// padding-top: 100px;
-	color: #604e4f;
+	// color: #604e4f;
 
 	p {
 		font-size: 40px;
@@ -267,11 +274,11 @@ input[type=checkbox] {
 
 #recipeContainer {
 	float: left;
-	width: 75%;
+	width: 66%;
 	h2 {
 		font-size: 45px;
 		font-family: $openSans;
-		color: #604e4f;
+		color: beige;
 		margin-top: 25px;	
 		// font-style: italic;	
 	}
@@ -286,7 +293,7 @@ input[type=checkbox] {
 	}
 
 	p {
-		color: $brown;
+		color: $beige;
 		font-family: $openSans;
 		font-weight: bold;
 		font-size: 20px;
@@ -297,23 +304,24 @@ input[type=checkbox] {
 	h4 {
 		font-size: 30px;
 		font-family: $openSans;
-		color: gray;
+		color: $beige;
 	}
 
 	a {
 		color: $beige;
 		font-family: $openSans;
-		color: $brown;
+		// color: $brown;
 		background: none;
 		font-size: 18px;
 		text-transform: uppercase;
+		text-decoration: underline;
 		// font-weight: bold;
 		// font-style: italic;
 	}
 
 	.saveButton {
-		color: $beige;
-		background: $brown;
+		// color: $beige;
+		// background: $brown;
 		font-family: $openSans;
 		font-size: 20px;
 		margin-bottom: 40px;
@@ -322,11 +330,15 @@ input[type=checkbox] {
 	}
 }
 
+.savedRecipeImage {
+	width: 100px;
+}
+
 footer {
 	clear: both;
 	font-family: $openSans;
 	color: $beige;
-	background-color: $brown;
+	background-color: $darkerBrown;
 }
 
 .footerLeft {
