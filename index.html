@@ -7,6 +7,9 @@
 	<link rel="stylesheet" href="public/styles/style.css">
 	<!-- <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700|Open+Sans+Condensed:300,700" rel="stylesheet"> -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700|Slabo+27px" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,700i" rel="stylesheet">
+	<link rel="stylesheet"
+	  href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 </head>
 <body>
 	<header>
@@ -23,11 +26,11 @@
 		</div>
 	</header>
 	<main>
-		<form class="userInfo" id="userInfo">
+		<form class="userInfo" id="userInfo" action="#resultsContainer">
 			<div class="wrapper">
 				<div class="tp-autocomplete">
 					<div class="userInput">
-						<input type="text" class="my-input tp-ac__input" placeholder="Pick your city" autocomplete="off" data-com.agilebits.onepassword.user-edited="yes">
+						<input type="text" class="my-input tp-ac__input" placeholder="Pick your city" autocomplete="on">
 						<ul class="tp-ac__list"></ul>
 					</div>
 				</div>
@@ -98,16 +101,18 @@
 					</div>
 				</div>
 			</div>
-			<input type="submit" value="submit">
+			<input type="submit" value="Submit">
 		</form>
 		</div>
-		<div id="resultsContainer">
+		<section id="resultsContainer">
 			<div class="wrapper clearfix">
-				<div id="weatherContainer"></div>
 				<div id ="recipeContainer"></div>
-				<aside class="savedRecipes"></aside>
+				<aside>
+					<div id="weatherContainer"></div>
+					<div class="savedRecipes"></div>
+				</aside>
 			</div>
-		</div>
+		</section>
 	</main>
 	<footer>
 		<div class="wrapper">

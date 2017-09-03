@@ -63,6 +63,9 @@ app.events = () => {
 			return $(this).val();
 			}).get();
 			app.callYummly(app.foodChoice, allergyRestrict, dietRestrict);
+			$('html, body').animate({
+        	scrollTop: $('#resultsContainer').offset().top
+      }, 2500);
 	});
 	$('#recipeContainer').on('click', '.saveButton', (e) => {
 		e.preventDefault();
@@ -120,34 +123,34 @@ app.callRecipeInfo = (recipeId) => {
 app.chooseIcon = (res) => {
 	app.weatherIcon = {};
 		if(app.currentIcon === 'clear-day'){
-			app.weatherIcon = $('<img>').attr('src', 'dev/assets/clear-day.svg');
+			app.weatherIcon = $('<img class="weatherIcon">').attr('src', 'dev/assets/clear-day.svg');
 		}
 		else if(app.currentIcon === 'clear-night'){
-			app.weatherIcon = $('<img>').attr('src', 'dev/assets/clear-night.svg');
+			app.weatherIcon = $('<img class="weatherIcon">').attr('src', 'dev/assets/clear-night.svg');
 		}
 		else if(app.currentIcon === 'rain'){
-			app.weatherIcon = $('<img>').attr('src', 'dev/assets/rain.svg');
+			app.weatherIcon = $('<img class="weatherIcon">').attr('src', 'dev/assets/rain.svg');
 		}
 		else if(app.currentIcon === 'snow'){
-			app.weatherIcon = $('<img>').attr('src', 'dev/assets/snow.svg');
+			app.weatherIcon = $('<img class="weatherIcon">').attr('src', 'dev/assets/snow.svg');
 		}
 		else if(app.currentIcon === 'sleet'){
-			app.weatherIcon = $('<img>').attr('src', 'dev/assets/sleet.svg');
+			app.weatherIcon = $('<img class="weatherIcon">').attr('src', 'dev/assets/sleet.svg');
 		}
 		else if(app.currentIcon === 'wind'){
-			app.weatherIcon = $('<img>').attr('src', 'dev/assets/wind.svg');
+			app.weatherIcon = $('<img class="weatherIcon">').attr('src', 'dev/assets/wind.svg');
 		}
 		else if(app.currentIcon === 'fog'){
-			app.weatherIcon = $('<img>').attr('src', 'dev/assets/fog.svg');
+			app.weatherIcon = $('<img class="weatherIcon">').attr('src', 'dev/assets/fog.svg');
 		}
 		else if(app.currentIcon === 'cloudy'){
-			app.weatherIcon = $('<img>').attr('src', 'dev/assets/cloudy.svg');
+			app.weatherIcon = $('<img class="weatherIcon">').attr('src', 'dev/assets/cloudy.svg');
 		}
 		else if(app.currentIcon === 'partly-cloudy-day'){
-			app.weatherIcon = $('<img>').attr('src', 'dev/assets/partly-cloudy-day.svg');
+			app.weatherIcon = $('<img class="weatherIcon">').attr('src', 'dev/assets/partly-cloudy-day.svg');
 		}
 		else{
-			app.weatherIcon = $('<img>').attr('src', 'dev/assets/partly-cloudy-night.svg');
+			app.weatherIcon = $('<img class="weatherIcon">').attr('src', 'dev/assets/partly-cloudy-night.svg');
 		}
 	app.display(res);
 }
@@ -155,9 +158,9 @@ app.chooseIcon = (res) => {
 // a function that displays our information on the page
 app.display = (res) => {
 	$('#weatherContainer').empty();
-	$('#weatherContainer').append(`<p>${app.currentTemp}&deg;C</p>`);
-	$('#weatherContainer').append(app.currentWeather);
 	$('#weatherContainer').append(app.weatherIcon);
+	$('#weatherContainer').append(app.currentWeather);
+	$('#weatherContainer').append(`<p>${app.currentTemp}&deg;C</p>`);
 	$('#recipeContainer').empty();
 	$('.savedRecipes').empty();
 	let selectedImage = $('<img>').attr('src', res.images[0].hostedLargeUrl);
@@ -190,7 +193,8 @@ app.showSaved = () => {
 		$('.savedRecipes ul').empty();
 		for (item in recipeList){
 			let recipeName = recipeList[item];
-			$('.savedRecipes ul').append(`<li><a href="${recipeName.source.sourceRecipeUrl}">${recipeName.name}</a></li>`);
+			console.log(recipeName.images[0]);
+			$('.savedRecipes ul').append(`<li><a class="savedRecipeLink" href="${recipeName.source.sourceRecipeUrl}"><div class=savedRecipeItem><p>${recipeName.name}</p><img class="savedRecipeImage" src=${(recipeName.images[0]).hostedLargeUrl}></div></a></li>`);
 		}
 	});
 }
