@@ -1,6 +1,6 @@
 const app = {};
-// call to Teleport autocomplete
 
+// call to Teleport autocomplete
 app.callTeleport = () => {
 	TeleportAutocomplete.init('.my-input').on('change', (cityData) => {
 		let latitude = cityData.latitude;
@@ -68,6 +68,9 @@ app.events = () => {
 		e.preventDefault();
 		app.saveRecipes();
 	});
+	$('.ifClicked').click(function(){
+		$(this).data('clicked', true);
+	});
 }
 
 // ajax call to Yummly
@@ -115,41 +118,39 @@ app.callRecipeInfo = (recipeId) => {
 
 // a function that chooses an icon to display based on the weather
 app.chooseIcon = (res) => {
-		app.weatherIcon = {};
-			if(app.currentIcon === 'clear-day'){
-				app.weatherIcon = $('<img>').attr('src', 'dev/assets/clear-day.svg');
-			}
-			else if(app.currentIcon === 'clear-night'){
-				app.weatherIcon = $('<img>').attr('src', 'dev/assets/clear-night.svg');
-			}
-			else if(app.currentIcon === 'rain'){
-				app.weatherIcon = $('<img>').attr('src', 'dev/assets/clear-rain.svg');
-			}
-			else if(app.currentIcon === 'snow'){
-				app.weatherIcon = $('<img>').attr('src', 'dev/assets/clear-snow.svg');
-			}
-			else if(app.currentIcon === 'sleet'){
-				app.weatherIcon = $('<img>').attr('src', 'dev/assets/clear-sleet.svg');
-			}
-			else if(app.currentIcon === 'wind'){
-				app.weatherIcon = $('<img>').attr('src', 'dev/assets/wind.svg');
-			}
-			else if(app.currentIcon === 'fog'){
-				app.weatherIcon = $('<img>').attr('src', 'dev/assets/fog.svg');
-			}
-			else if(app.currentIcon === 'cloudy'){
-				app.weatherIcon = $('<img>').attr('src', 'dev/assets/cloudy.svg');
-			}
-			else if(app.currentIcon === 'partly-cloudy-day'){
-				app.weatherIcon = $('<img>').attr('src', 'dev/assets/partly-cloudy-day.svg');
-			}
-			else{
-				app.weatherIcon = $('<img>').attr('src', 'dev/assets/partly-cloudy-night.svg');
-			}
-		app.display(res);
-
+	app.weatherIcon = {};
+		if(app.currentIcon === 'clear-day'){
+			app.weatherIcon = $('<img>').attr('src', 'dev/assets/clear-day.svg');
+		}
+		else if(app.currentIcon === 'clear-night'){
+			app.weatherIcon = $('<img>').attr('src', 'dev/assets/clear-night.svg');
+		}
+		else if(app.currentIcon === 'rain'){
+			app.weatherIcon = $('<img>').attr('src', 'dev/assets/rain.svg');
+		}
+		else if(app.currentIcon === 'snow'){
+			app.weatherIcon = $('<img>').attr('src', 'dev/assets/snow.svg');
+		}
+		else if(app.currentIcon === 'sleet'){
+			app.weatherIcon = $('<img>').attr('src', 'dev/assets/sleet.svg');
+		}
+		else if(app.currentIcon === 'wind'){
+			app.weatherIcon = $('<img>').attr('src', 'dev/assets/wind.svg');
+		}
+		else if(app.currentIcon === 'fog'){
+			app.weatherIcon = $('<img>').attr('src', 'dev/assets/fog.svg');
+		}
+		else if(app.currentIcon === 'cloudy'){
+			app.weatherIcon = $('<img>').attr('src', 'dev/assets/cloudy.svg');
+		}
+		else if(app.currentIcon === 'partly-cloudy-day'){
+			app.weatherIcon = $('<img>').attr('src', 'dev/assets/partly-cloudy-day.svg');
+		}
+		else{
+			app.weatherIcon = $('<img>').attr('src', 'dev/assets/partly-cloudy-night.svg');
+		}
+	app.display(res);
 }
-
 
 // a function that displays our information on the page
 app.display = (res) => {
@@ -169,6 +170,28 @@ app.display = (res) => {
 	let saveButton = $('<button>').addClass('saveButton').text('Save Recipe');
 	$('#recipeContainer').append(saveButton);
 	app.selectedRecipe = res;
+	$('.savedRecipes').append('<h3>Saved Recipes</h3><ul></ul>');
+	app.showSaved();
+}
+
+
+// a function that saves a selected recipe to firebase
+const dbRef = firebase.database().ref();
+app.saveRecipes = () => {
+	let recipeItem = app.selectedRecipe;
+	dbRef.push(recipeItem);
+}
+
+// a function that shows saved recipes
+app.showSaved = () => {
+	dbRef.on('value', (snapshot) => {
+		const recipeList = snapshot.val();
+		$('.savedRecipes ul').empty();
+		for (item in recipeList){
+			let recipeName = recipeList[item];
+			$('.savedRecipes ul').append(`<li><a href="${recipeName.source.sourceRecipeUrl}">${recipeName.name}</a></li>`);
+		}
+	});
 }
 
 // General smooth scroll code inspired by: https://css-tricks.com/snippets/jquery/smooth-scrolling/
@@ -198,12 +221,6 @@ $('a[href*="#"]')
 		}
 	}
 });
-
-// a function that saves a selected recipe to firebase
-app.saveRecipes = () => {
-	var dbRef = firebase.database().ref();
-	dbRef.push(app.selectedRecipe);
-}
 
 // a function that initializes our code
 app.init = () => {
