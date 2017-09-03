@@ -159,6 +159,7 @@ app.display = (res) => {
 	$('#weatherContainer').append(app.currentWeather);
 	$('#weatherContainer').append(app.weatherIcon);
 	$('#recipeContainer').empty();
+	$('.savedRecipes').empty();
 	let selectedImage = $('<img>').attr('src', res.images[0].hostedLargeUrl);
 	let selectedName = $('<h2>').text(res.name);
 	let selectedTime = $('<h4>').text(res.totalTime);
