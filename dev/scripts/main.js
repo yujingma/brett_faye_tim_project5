@@ -178,7 +178,6 @@ app.display = (res) => {
 	app.showSaved();
 }
 
-
 // a function that saves a selected recipe to firebase
 const dbRef = firebase.database().ref();
 app.saveRecipes = () => {
