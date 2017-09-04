@@ -459,8 +459,17 @@ a.savedRecipeLink {
 	font-family: $openSans;
 	font-weight: bold;
 	position: relative;
+	@include respond-to('xlarge') {
+		margin-top: 0px;
+		margin-bottom: 200px;
+		}
+	@include respond-to('large') {
+		margin-top: 0px;
+		margin-bottom: 200px;
+		}
 	@include respond-to('medium') {
 		margin-top: 0px;
+		margin-bottom: 200px;
 		}
 
 	h4 {
@@ -470,8 +479,19 @@ a.savedRecipeLink {
 		margin-bottom: 15px;
 		line-height: 4px;
 		padding-top: 50px;
+		@include respond-to('xlarge') {
+		line-height: 60px;
+		padding-left: 120px;
+	
+		}
+		@include respond-to('large') {
+		line-height: 60px;
+		padding-left: 120px;
+	
+		}
 		@include respond-to('medium') {
-		padding-left: 60px;
+		padding-left: 90px;
+		line-height: 60px;
 	
 		}
 	}
@@ -483,8 +503,16 @@ a.savedRecipeLink {
 		font-weight: lighter;
 		padding-left: 160px;
 		margin-top: 0px;
+		@include respond-to('xlarge') {
+		padding-left: 120px;
+	
+		}
+		@include respond-to('large') {
+		padding-left: 120px;
+	
+		}
 		@include respond-to('medium') {
-		padding-left: 60px;
+		padding-left: 90px;
 		}
 	}
 
@@ -495,8 +523,18 @@ a.savedRecipeLink {
 		top: 2px;
 		left: 15px;
 		filter: drop-shadow(0 0 2px $darkerBrown);
+		@include respond-to('xlarge') {
+		top: 30px;
+		left: -30px;
+	
+		}
+		@include respond-to('large') {
+		top: 30px;
+		left: -30px;
+	
+		}
 		@include respond-to('medium') {
-		top: -20px;
+		top: 20px;
 		left: -40px;
 		}
 	}
