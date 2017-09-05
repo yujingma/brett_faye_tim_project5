@@ -3,18 +3,16 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Weather We Eat?</title>
+	<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'/>
+	<link rel="shortcut icon" href="dev/assets/favicon-16x16.png" type="image/x-icon">
 	<link rel="stylesheet" href="dev/plugins/teleport/teleport-autocomplete.css">
 	<link rel="stylesheet" href="public/styles/style.css">
-	<!-- <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700|Open+Sans+Condensed:300,700" rel="stylesheet"> -->
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700|Slabo+27px" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,700i" rel="stylesheet">
-	<link rel="stylesheet"
-	  href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700|Playfair+Display:400,700,700i" rel="stylesheet">
 </head>
 <body>
 	<header>
-			<div class="overlay">
-		<div class="headerWrapper">
+		<div class="overlay">
+			<div class="headerWrapper">
 				<div class="headerContainer">
 					<div class="title">
 						<h1>Weather We Eat?</h1>
@@ -35,7 +33,7 @@
 					</div>
 				</div>
 				<div class="foodRestricts">
-					<div class="firstPart clearfix">
+					<div class="firstPartFoodRestricts clearfix">
 						<div class="peanutFree">
 							<input type="checkbox" class="allergy" id="check1" value="394^Peanut-Free">
 							<label for="check1">Peanut Free</label>
@@ -66,8 +64,8 @@
 							<label for="check6">Egg Free</label>
 							<img src="dev/assets/egg.svg" alt="Eggs Free Icon">
 						</div>
-					</div>
-					<div class="secondPart clearfix">
+					
+					
 						<div class="soyFree">
 							<input type="checkbox" class="allergy" id="check7" value="400^Soy-Free">
 							<label for="check7">Soy Free</label>
@@ -104,13 +102,15 @@
 			<input type="submit" value="Submit">
 		</form>
 		</div>
-		<section id="resultsContainer">
-			<div class="wrapper clearfix">
-				<div id ="recipeContainer"></div>
-				<aside>
-					<div id="weatherContainer"></div>
-					<div class="savedRecipes"></div>
-				</aside>
+		<section id="resultsContainer" class="clearfix">
+			<div class="resultsWrapper">
+				<div class="wrapper clearfix">
+					<div id ="recipeContainer"></div>
+					<aside>
+						<div id="weatherContainer"></div>
+						<div class="savedRecipes"></div>
+					</aside>
+				</div>
 			</div>
 		</section>
 	</main>
@@ -118,23 +118,23 @@
 		<div class="wrapper">
 			<div class="footerContainer clearfix">
 				<div class="footerLeft">
-					<p>Header photo by <a href="https://unsplash.com/@punttim" target="_blank">Tim Goaw</a> at <a href="https://unsplash.com/search/photos/toronto?photo=sfUxCShoKbE" target="_blank">Unsplash</a></p>
-					<p>Pick a cuisine photo by <a href="https://unsplash.com/@markjparaan">Mark Jefferson</a> at <a href="https://unsplash.com/search/photos/toronto?photo=UR7RzFRXcrU" target="_blank">Unsplash</a></p>
-					<p>Plate and knife logo by <a href="https://thenounproject.com/hanne01/" target="_blank">Hanne</a> at <a href="https://thenounproject.com/hanne01/collection/dishes/?oq=plate%20and%20cutlery&cidx=15">The Noun Project</a></p>
+					<p>Header photo by <a href="https://unsplash.com/@oelli" target="_blank">Elli O.</a> at <a href="https://unsplash.com/@oelli?photo=XoByiBymX20" target="_blank">Unsplash</a></p>
+					<p>Food Allergy Icons by <a href="https://thenounproject.com/tomas.knopp/" target="_blank">Tomas Knopp</a> at <a href="https://thenounproject.com/tomas.knopp/collection/allergens/?oq=food%20allergies&cidx=3">The Noun Project</a></p>
+					<p>Climacons by<a href="http://adamwhitcroft.com/climacons/" target="_blank"> Adam Whitcroft</a></p>
 				</div>
 				<div class="footerCenter">
 					<p>Powered by:</p>
-					<a href=""><img class="darkSky" src="dev/assets/darkSkyBeige.png" alt="Dark Sky Api Logo"></a>
-					<a href=""><img class="teleport" src="dev/assets/teleportLogoBeige.png" alt="Teleport Api Logo"></a>
-					<a href=""><img class="yummily" src="dev/assets/yummilyBeige.png" alt="Yummily Api Logo"></a>
+					<a href="https://darksky.net/dev" target="_blank"><img class="darkSky" src="dev/assets/darkSkyBeige.png" alt="Dark Sky Api Logo"></a>
+					<a href="https://teleport.org/" target="_blank"><img class="teleport" src="dev/assets/teleportLogoBeige.png" alt="Teleport Api Logo"></a>
+					<a href="https://developer.yummly.com/" target="_blank"><img class="yummily" src="dev/assets/yummilyBeige.png" alt="Yummily Api Logo"></a>
 					<h3> &copy; 2017 Weather We Eat?</h3>
 				</div>
 				<div class="footerRight">
 					<p>Built by:</p>
 					<p>
-						<a href="http://www.brettnielsen.ca">Brett Nielsen</a>, 
-						<a href="http://www.fayeyujingma.ca">Faye Ma</a> & 
-						<a href="http://www.timlemke.ca">Tim Lemke</a>
+						<a href="http://www.brettnielsen.ca" target="_blank">Brett Nielsen</a>, 
+						<a href="http://www.fayeyujingma.ca" target="_blank">Faye Ma</a> & 
+						<a href="http://www.timlemke.ca" target="_blank">Tim Lemke</a>
 					</p>
 				</div>
 		</div>

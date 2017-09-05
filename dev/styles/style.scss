@@ -1,8 +1,9 @@
 @import "partials/setup";
+@import "partials/mixins";
 
-$lato: 'Lato', sans-serif;
+//VARIABLES
+
 $openSans: 'Open Sans Condensed', sans-serif;
-$slabo: 'Slabo 27px', serif;
 $playfair: 'Playfair Display', serif;
 
 $lightGreen: #DDE8B9;
@@ -11,10 +12,13 @@ $red: #CB8589;
 $brown: #796465;
 $darkerBrown: #392F30;
 
+//GLOBAL STYLES
+
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	transition: 0.3s;
 }
 
 button {
@@ -31,6 +35,7 @@ a {
 .headerWrapper {
 	max-width: 1500px;
 	margin: 0 auto;
+
 }
 .wrapper {
 	max-width: 1170px;
@@ -41,14 +46,27 @@ img {
 	max-width: 100%;
 }
 
+//HEADER STYLES
+
 header {
-	background-image: url('../../dev/assets/elli-o-65548-edit3.jpg');
+	background-image: url('../../dev/assets/elli-o-65548-edit5.jpg');
 	background-size: cover;
-	// background-position: 50px 100px;
 	background-repeat: no-repeat;
 	height: 1000px;
-	// box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, .25);
-	// box-shadow: inset 0 0 0 1000px rgba(121, 100, 101, 0.1);
+	@include respond-to('large') {
+		background-position: 25% 50%;
+	}
+	@include respond-to('medium') {
+		height: 800px;
+		margin: 0 auto;
+		text-align: center;
+		background-position: 5% 50%;
+	}
+}
+
+.overlay {
+	box-shadow: inset 0 0 0 1000px rgba(57, 47, 48, 0.15);
+	height: 1000px;
 }
 
 .headerContainer {
@@ -56,17 +74,21 @@ header {
 	text-align: center;
 	color: #DDE8B9;
 	position: relative;
+	@include respond-to('medium') {
+		width: 100%;
+	}
 	h1 {
 		color: $beige;
-		// font-family: $slabo;
 		font-family: $playfair;
 		font-style: italic;
 		font-weight: 700;
 		font-size: 150px;
 		line-height: 170px;
-		// letter-spacing: 2px;
 		text-shadow: 0 0 15px $darkerBrown;
-		// text-transform: uppercase;
+		@include respond-to('medium') {
+			font-size: 80px;
+			line-height: 80px;
+		}
 	}
 	h2 {
 		padding-top: 30px;
@@ -77,15 +99,15 @@ header {
 	}
 }
 
-.overlay {
-	// box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.1);
-	box-shadow: inset 0 0 0 1000px rgba(57, 47, 48, 0.15);
-	height: 1000px;
-}
 .title {
 	position: absolute;
 	margin-top: 32%;
 	margin-left: 5%;
+	@include respond-to('medium') {
+		position: static;
+		margin: 0;
+		padding-top: 35%;
+	}
 }
 
 #getStarted {
@@ -104,14 +126,22 @@ header {
 	color: $beige;
 }
 
+//USER INPUT SECTION
+
 input.my-input {
 	color: $brown;
 	font-family: $openSans;
+	margin-bottom: 10px;
 }
 
 .tp-autocomplete {
 	margin: 0 auto;
 	font-family: $openSans;
+	padding-top: 40px;
+	padding-bottom: 30px;
+	@include respond-to('small') {
+		width: 95%;
+	}
 }
 
 .tp-ac__input {
@@ -136,28 +166,72 @@ input.my-input {
 .foodRestricts {
 	margin: 0 auto;
 	text-align: center;
+	@include respond-to('medium') {
+		label {
+			font-size: 30px;
+			@include respond-to('small') {
+				font-size: 20px;
+				padding-left: 10px;
+			}
+		}
+	}
 }
 
 .foodRestricts img{
 	max-width: 50%;
 }
 
-
-.firstPart, .secondPart {
-	width: 100%;	
+.firstPartFoodRestricts {
+	width: 100%;
 }
 
 .peanutFree, .treenutFree, .glutenFree, .seafoodFree, .dairyFree, .eggFree {
+	margin: 0;
+	padding: 0;
 	width: calc(100% / 6);
+	height: 250px;
 	float: left;
+	@include respond-to('xlarge') {
+		height: 200px;
+	}
+	@include respond-to('large') {
+		width: 20%;
+		float: none;
+		display: inline-block;
+	}
+	@include respond-to('medium') {
+		width: 30%;
+	}
+	@include respond-to('small') {
+		width: 40%;
+		height: 150px;
+	}
 	img {
 		max-width: 60%;
 	}
 }
 
 .soyFree, .seasameFree, .sulfiteFree, .vegetarian, .vegan, .paleo {
+	margin: 0;
+	padding: 0;
 	width: calc(100% / 6);
+	height: 250px;
 	float: left;
+	@include respond-to('xlarge') {
+		height: 200px;
+	}
+	@include respond-to('large') {
+		width: 20%;
+		float: none;
+		display: inline-block;
+	}
+	@include respond-to('medium') {
+		width: 30%;
+	}
+	@include respond-to('small') {
+		width: 40%;
+		height: 150px;
+	}
 	img {
 		max-width: 60%;
 	}
@@ -172,40 +246,27 @@ form {
 	font-weight: 400;
 	color: $brown;
 	font-size: 25px;
-}
-
-.tp-autocomplete {
-	padding-top: 40px;
-	padding-bottom: 30px;
-	font-family: $openSans;
+	@include respond-to('small') {
+		font-size: 15px;
+	}
 }
 
 .soyFree img{
 	width: 80%;
-	// display: block;
-}
-
-.eggFree img {
-	// width: 80%;
-	// display: block;
-}
-
-.vegan img {
-	// width: 45%;
-	// display: block;
-	// margin: 0 auto;
 }
 
 .paleo img {
 	width: 75%;
 	display: block;
 	margin: 0 auto;
+	@include respond-to('xlarge') {
+		display: inline;
+	}
 }
 
 input[type=submit] {
 	margin: 0 auto;
 	font-size: 15px;
-	// text-transform: uppercase;
 	padding:15px 30px;
 	font-family: $openSans;
 	background: $brown;
@@ -213,7 +274,6 @@ input[type=submit] {
 	border: none;
 	display: block;
 	border-radius: 50px;
-	margin-top: 20px;
 	outline: none;
 }
 
@@ -224,58 +284,63 @@ input[type=submit]:hover {
 }
 
 input[type=checkbox] {
-    appearance: none;
-    width: 21px;
-    height: 21px;
-    background: $red;
-    border-radius: 50%;
-    color: $brown;
-    position: relative;
-    box-shadow: 0 0 5px $brown;
-    outline: none;
-    &:checked::after{
-    	// background: $lightGreen;
-        position: absolute;
-        content: 'X';
-        color: $beige;
-        font-weight: 700;
-        font-size: 18px;
-        left: 6px;
-        // top: 0px;
-        bottom: 0px;
-    }
-}
+	appearance: none;
+	width: 21px;
+	height: 21px;
+	background: $red;
+	border-radius: 50%;
+	color: $brown;
+	position: relative;
+	box-shadow: 0 0 5px $brown;
+	outline: none;
+	&:checked::after{
+		position: absolute;
+		content: 'X';
+		color: $beige;
+		font-weight: 700;
+		font-size: 18px;
+		left: 6px;
+		bottom: 0px;
+		}
+	}
+
+//RESULTS SECTIONS STYLES
 
 #resultsContainer {
 	height: auto;
-	// background-color: $brown;	
-	// background-color: $red;
-	// background-image: url('../../dev/assets/tim-gouw-165094.jpg');
 	background-color: #796465;
 	background-image: url('../../dev/assets/arches.png');
-	// background-color: $brown;
-
-	// background-size: cover;
 	background-position: center;
 	text-shadow: 0 0 10px $darkerBrown;
+}
+
+.resultsWrapper {
+	@include respond-to('xlarge') {
+		margin: 0 auto;
+		width: 95%; 
+	}
 }
 
 #recipeContainer {
 	float: left;
 	width: 60%;
+	@include respond-to('medium') {
+		float: none;
+		width: 100%;
+		text-align: center;
+	}
+
 	h2 {
 		font-size: 45px;
 		font-family: $openSans;
 		color: $beige;
 		margin-top: 25px;	
-		// font-style: italic;	
 	}
 
 	img {
 		border-radius: 50px;
 		width: 80%;
 		border: 4px solid $beige;
-		// padding: 15px;
 		margin-top: 80px;
 		box-shadow: 0 0 10px $darkerBrown;
 	}
@@ -286,7 +351,6 @@ input[type=checkbox] {
 		font-weight: bold;
 		font-size: 20px;
 		margin-top: 20px;
-
 	}
 
 	h4 {
@@ -303,7 +367,6 @@ input[type=checkbox] {
 		font-size: 18px;
 		text-transform: uppercase;
 		text-decoration: underline;
-
 	}
 
 	.saveButton {
@@ -325,6 +388,11 @@ aside {
 	li {
 		list-style-type: none;
 	}
+	@include respond-to('medium') {
+		float: none;
+		width: 100%;
+		text-align: center;
+	}
 }
 
 .savedRecipes {
@@ -333,8 +401,7 @@ aside {
 	font-family: $openSans;
 	padding-bottom: 50px;
 	h3 {
-		text-transform: uppercase;
-		font-size: 50px;
+		font-size: 45px;
 		padding-bottom: 20px;
 	}
 }
@@ -345,19 +412,31 @@ aside {
 	padding-right: 10px;
 	padding-bottom: 10px;
 	text-align: center;
-	// transition: all 10s ease;
+	@include respond-to('large') {
+		height: 130px;
+		margin-bottom: 15px;
+	}
+	@include respond-to('medium') {
+		margin-bottom: 125px;
+		}
+	@include respond-to('small') {
+		margin-bottom: 40px
+	}
 	p {
 		padding-bottom: 10px;
 	}
-}
+	
+	}
 
 a.savedRecipeLink {
-		display: block;
-		font-family: $openSans;
-		font-size: 15px;
-		color: $beige;
-		font-weight: 700;
-		// padding-bottom: 10px;
+	display: block;
+	font-family: $openSans;
+	font-size: 15px;
+	color: $beige;
+	font-weight: 700;
+	@include respond-to('xlarge') {
+	font-size: 12px;
+	}
 }
 
 .savedRecipeImage {
@@ -374,57 +453,94 @@ a.savedRecipeLink {
 #weatherContainer {
 	text-align: center;
 	margin-top: 80px;
-	margin-bottom: 50px;
-	// margin: 0 auto;
+	margin-bottom: 120px;
 	width: 100%;
 	height: 100px;
-	// float: right;
 	text-align: left;
 	font-family: $openSans;
 	font-weight: bold;
 	position: relative;
-	// padding-top: 100px;
-	// padding-right: 200px;
-	// color: #604e4f;
+	@include respond-to('xlarge') {
+		margin-top: 0px;
+		margin-bottom: 150px;
+		}
+	@include respond-to('large') {
+		margin-top: 0px;
+		margin-bottom: 200px;
+		}
+	@include respond-to('medium') {
+		margin-top: 0px;
+		margin-bottom: 150px;
+		}
+
 	h4 {
 		font-size: 50px;
 		color: $beige;
-		padding-left: 160px;
+		padding-left: 190px;
 		margin-bottom: 15px;
-		line-height: 4px;
-		// float-right: 40px;
+		line-height: 60px;
 		padding-top: 50px;
+		// padding-bottom: 80px;
+		@include respond-to('xlarge') {
+		line-height: 60px;
+		padding-left: 150px;
+	
+		}
+		@include respond-to('large') {
+		line-height: 60px;
+		padding-left: 140px;
+	
+		}
+		@include respond-to('medium') {
+		padding-left: 140px;
+		line-height: 60px;
+	
+		}
 	}
+
 	p {
 		font-size: 40px;
-
-		// float: right;
 		font-family: $openSans;
 		color: $beige;
 		font-weight: lighter;
-		// padding-top: 100px;
-		padding-left: 160px;
+		padding-left: 190px;
 		margin-top: 0px;
-		
-	}
+		@include respond-to('xlarge') {
+		padding-left: 150px;
 	
+		}
+		@include respond-to('large') {
+		padding-left: 140px;
+	
+		}
+		@include respond-to('medium') {
+		padding-left: 140px;
+		}
+	}
+
 	.weatherIcon {
-		width: 150px;
+		width: 220px;
 		text-align: left;
-		// z-index: -1;
 		position: absolute;
 		top: 2px;
 		left: 15px;
 		filter: drop-shadow(0 0 2px $darkerBrown);
-		// float: left;
-		// width: 200px;
-		// margin-right: -80px;
+		@include respond-to('xlarge') {
+		top: 4px;
+		left: -30px;
+	
+		}
+		@include respond-to('large') {
+		top: 4px;
+		left: -30px;
+	
+		}
+		@include respond-to('medium') {
+		top: 20px;
+		left: -40px;
+		}
 	}
 }
-
-
-
-
 
 footer {
 	clear: both;
@@ -433,18 +549,28 @@ footer {
 	background-color: $darkerBrown;
 }
 
+.footerContainer {
+	@include respond-to('xlarge') {
+		margin: 0 auto;
+		width: 95%; 
+	}
+}
+
 .footerLeft {
 	width: 33.33%;
 	float: left;
 	padding-top: 40px;
-
 	a {
 		color: $beige;
+	}
+	@include respond-to('small') {
+		float: none;
+		text-align: center;
+		width: 100%;
 	}
 }
 
 .footerCenter {
-	// margin: 0 auto;
 	width: 33.33%;
 	float: left;
 	text-align: center;
@@ -458,6 +584,11 @@ footer {
 		font-size: 15px;
 		padding-top: 10px;
 		padding-bottom: 10px;
+	}
+	@include respond-to('small') {
+		float: none;
+		text-align: center;
+		width: 100%;
 	}
 }
 
@@ -483,5 +614,10 @@ footer {
 	a {
 		color: $beige;
 	}
+	@include respond-to('small') {
+		float: none;
+		text-align: center;
+		width: 100%;
+		padding-bottom: 50px;
+	}
 }
-
