@@ -5,15 +5,17 @@ app.callTeleport = () => {
 	TeleportAutocomplete.init('.my-input').on('change', (cityData) => {
 		let latitude = cityData.latitude;
 		let longitude = cityData.longitude;
-		app.callDarkSky(latitude, longitude);
+		app.callDarkSky(latitude,longitude);
 	});
 }
 
 // ajax call to Dark Sky
-app.callDarkSky = (latitude, longitude) => {
+app.callDarkSky = (latitude,longitude) => {
+// why these two parameters have to exist????why I change their names???
 	let keyDarkSky = 'ecb6e7f16bb182021ecf519d1099721a';
 	let weather = $.ajax({
 		url: `https://api.darksky.net/forecast/${keyDarkSky}/${latitude},${longitude}?units=ca`,
+											// why in documentation it's [key],[lat],[lon]??????
 		method: 'GET',
 		dataType: 'jsonp'
 	}).then((res) => {
@@ -66,6 +68,7 @@ app.events = () => {
 			$('html, body').animate({
         	scrollTop: $('#resultsContainer').offset().top
       }, 2500);
+		// what this code is for??????why call app.callyummly here?????
 	});
 	$('#recipeContainer').on('click', '.saveButton', (e) => {
 		e.preventDefault();
